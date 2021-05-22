@@ -18,11 +18,6 @@ const CreateAdvertisement = () => {
 	const refImageLoader = useRef(null);
 	const [imageLoaderShow, setImageLoaderShow] = useState(false);
 	
-	// location: 'Kyiv Улица',
-			// price: 5000,
-			// sleepingPlaces: 1,
-			// description: 'Text',
-	
 	const createAdvetritesementHandler = async () => {
 		const data = {
 			location: refLocation.current.value + ' ' + refStreet.current.value,
@@ -31,10 +26,10 @@ const CreateAdvertisement = () => {
 			description: refDescription.current.value
 		};
 		
-		//console.log(data)
-		
 		const result = await createAdvetritesement(data);
-		console.dir(result);
+		if (!result.isSuccess) {
+			alert("Error");
+		}
 	};
 
 	const one = () => {
