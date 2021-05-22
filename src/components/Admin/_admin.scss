@@ -1,7 +1,7 @@
 .admin {
 	&__apartments {
 		margin-top: 40px;
-	
+
 		& .apartments {
 			&__apartment {
 				position: relative;
@@ -13,12 +13,12 @@
 				border-radius: 4px;
 				padding: 20px;
 				padding-right: 100px;
-			
+
 				& .apartment {
-					&__picture {						
+					&__picture {
 						min-width: 150px;
 					}
-					
+
 					&__text {
 						color: $color-black;
 						padding-left: 20px;
@@ -27,14 +27,14 @@
 							float: right;
 						}
 					}
-					
+
 					&__buttons {
 						position: absolute;
 						@include flex();
 						flex-direction: column;
 						right: 20px;
 						top: 20px;
-						
+
 						& > button {
 							margin-bottom: 20px;
 						}

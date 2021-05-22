@@ -3,7 +3,7 @@ export const USER = {
 	location: 'Lviv',
 	dateOfBirth: '10.09.2002',
 	phoneNumber: '+3807374545812',
-	eMail: 'ann1234@gmail.com'
+	eMail: 'ann1234@gmail.com',
 };
 
 export const MY_ROOM = {
@@ -12,23 +12,24 @@ export const MY_ROOM = {
 	livingSpace: 70,
 	bathRooms: 2,
 	sleepingPlaces: 4,
-	description: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
+	description:
+		'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
 	photoes: [
 		'images/my-room/picture-1.png',
 		'images/my-room/picture-2.png',
-		'images/my-room/picture-3.png'
-	]
+		'images/my-room/picture-3.png',
+	],
 };
 
 export const LOGO_ICON = {
 	alt: 'Logo icon',
-	url: 'images/logo.png'
-}
+	url: 'images/logo.png',
+};
 
 export const HOME_PICTURES = [
 	'images/home/picture-1.png',
 	'images/home/picture-2.png',
-	'images/home/picture-3.png'
+	'images/home/picture-3.png',
 ];
 
 export const ADVERTISEMENT = [
@@ -38,12 +39,13 @@ export const ADVERTISEMENT = [
 		numberOfRooms: 4,
 		numberOfPeopleToLive: 2,
 		price: 3500,
-		description: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
+		description:
+			'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
 		photoes: [
 			'images/my-room/picture-1.png',
 			'images/my-room/picture-2.png',
-			'images/my-room/picture-3.png'
-		]
+			'images/my-room/picture-3.png',
+		],
 	},
 	{
 		location: 'Lviv',
@@ -51,13 +53,14 @@ export const ADVERTISEMENT = [
 		numberOfRooms: 4,
 		numberOfPeopleToLive: 2,
 		price: 3500,
-		description: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
+		description:
+			'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
 		photoes: [
 			'images/my-room/picture-1.png',
 			'images/my-room/picture-2.png',
-			'images/my-room/picture-3.png'
-		]
-	}
+			'images/my-room/picture-3.png',
+		],
+	},
 ];
 
 export const hostName = 'https://roommates33.herokuapp.com/';

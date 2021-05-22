@@ -12,33 +12,33 @@
 		border: 2px solid $color-blue;
 		border-radius: 4px;
 		padding: 30px 40px;
-		
+
 		& .main {
-			&__caption {				
+			&__caption {
 				& .caption {
 					&__header {
 						@include flex();
 						justify-content: flex-start;
 						align-items: flex-start;
 					}
-					
+
 					&__picture {
 						width: 200px;
 					}
-					
+
 					&__text-item {
 						list-style-type: none;
 					}
 				}
 			}
-			
+
 			&__pictures {
 				@include flex();
 				flex-wrap: wrap;
 				padding-left: 0;
 				margin-top: 20px;
 				margin-right: -20px;
-				
+
 				&-item {
 					list-style-type: none;
 					margin-right: 20px;
@@ -47,13 +47,13 @@
 			}
 		}
 	}
-	
+
 	&__right {
 		color: $color-black;
 		margin-left: 40px;
 		min-width: 250px;
 		font-size: 0.9rem;
-		
+
 		& .right {
 			&__text {
 				padding: 10px;
@@ -64,7 +64,7 @@
 				border-radius: 4px;
 				margin-top: 20px;
 			}
-			
+
 			&__header {
 				& .header {
 					&__figure {
@@ -74,11 +74,10 @@
 					}
 				}
 			}
-			
+
 			&__main {
 				& .main {
 					&__item {
-						
 					}
 				}
 			}

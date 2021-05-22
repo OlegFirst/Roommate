@@ -1,29 +1,29 @@
 @import './Information/_information.scss';
 @import './MyRoom/_my-room.scss';
 
-.profile {	
+.profile {
 	&__information {
 		@include flex();
 		justify-content: flex-start;
 		margin-top: 40px;
 	}
-	
+
 	&__my-room {
 		margin-top: 40px;
 	}
-	
+
 	&__footer {
 		@include flex();
 		justify-content: flex-end;
 		margin-top: 40px;
-		
+
 		& > button {
 			margin-left: 40px;
 		}
 	}
-	
+
 	&__footer-save {
 		@include flex();
-		margin-top: 40px;		
+		margin-top: 40px;
 	}
 }
