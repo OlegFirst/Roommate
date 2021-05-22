@@ -3,11 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { Button, FormControl } from 'react-bootstrap';
 
 import { LOGO_ICON } from '../../constants/main.js';
+import { setUserName } from '../../func/local-storage';
+import { serverSingUp } from '../../func/signUp';
 import Mail from '../_commonComponents/Mail/Mail';
 import LockClosed from '../_commonComponents/LockClosed/LockClosed';
 import LockOpened from '../_commonComponents/LockOpened/LockOpened';
-
-import { serverSingUp } from '../../func/signUp';
 
 // Create new account
 const SignUp = () => {
@@ -38,11 +38,11 @@ const SignUp = () => {
 		};
 
 		serverSingUp(arg, ({ isSuccess, data }) => {
-			console.log(isSuccess, data);
-			if (isSuccess) {
+      if (isSuccess) {				
 				const JWT = data.data.jwt;
-				localStorage.setItem('protect_JWT', JWT);
-				localStorage.setItem('protect_userName', name);
+				localStorage.setItem("protect_JWT", JWT);				
+				//localStorage.setItem("protect_userName", name);
+				setUserName(name);
 				history.push('/advertisement');
 			} else {
 				alert('Error');

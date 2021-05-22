@@ -6,6 +6,9 @@ import { LOGO_ICON } from '../../constants/main.js';
 import Mail from '../_commonComponents/Mail/Mail';
 import LockClosed from '../_commonComponents/LockClosed/LockClosed';
 
+import {
+	setUserName	
+} from '../../func/local-storage';
 import { serverSingIn } from '../../func/signIn';
 
 const Authentication = ({ role = 'sign-in' }) => {
@@ -32,8 +35,8 @@ const Authentication = ({ role = 'sign-in' }) => {
 		serverSingIn(arg, ({ isSuccess, data }) => {
 			if (isSuccess) {
 				const JWT = data.data.jwt;
-				localStorage.setItem('JWT', JWT);
-				localStorage.setItem('protect_userName', name);
+				localStorage.setItem("JWT", JWT);
+				setUserName(name);
 				history.push('/advertisement');
 			} else {
 				alert('Error');
