@@ -5,18 +5,33 @@ import Header from '../_commonComponents/Header/Header';
 import Information from './Information/Information';
 import MyRoom from './MyRoom/MyRoom';
 
-import { serverGetAccount, serverPutAccount } from '../../func/account';
+import {
+	serverGetAccount,
+	serverPutAccount,
+	serverGetMyAdverts,
+} from '../../func/account';
 const Profile = () => {
 	const [isInformationChanges, setIsInformationChanges] = useState(false);
 	const [isSaveClicked, setIsSaveClicked] = useState(false);
 
 	const [userData, setUserData] = useState({});
+
+	const [advertisement, setAdvertisement] = useState({});
 	useEffect(() => {
-		const fetchData = async () => {
+		const fetchAccountData = async () => {
 			const accountData = await serverGetAccount();
 			if (accountData.isSuccess) setUserData(accountData.data);
 		};
-		fetchData();
+		const fetchAccountAdverts = async () => {
+			const adverts = await serverGetMyAdverts();
+			if (adverts.isSuccess) {
+				if (adverts.data?.[0]) {
+					setAdvertisement(adverts.data?.[0]);
+				}
+			}
+		};
+		fetchAccountData();
+		fetchAccountAdverts();
 	}, []);
 
 	const startChanging = () => {
@@ -59,10 +74,15 @@ const Profile = () => {
 			</div>
 
 			<div className="profile__my-room">
-				<MyRoom
-					isChanging={isInformationChanges}
-					sendInfo={myRoomDataHandler}
-				/>
+				{advertisement._id ? (
+					<MyRoom
+						isChanging={isInformationChanges}
+						sendInfo={myRoomDataHandler}
+						advertisement={advertisement}
+					/>
+				) : (
+					<b>Create New</b>
+				)}
 			</div>
 
 			{!isInformationChanges && (

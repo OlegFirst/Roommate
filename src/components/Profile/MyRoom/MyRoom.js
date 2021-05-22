@@ -4,7 +4,10 @@ import { Button, FormControl } from 'react-bootstrap';
 import { MY_ROOM } from '../../../constants/main.js';
 import Picture from '../../_commonComponents/Picture/Picture';
 
-const MyRoom = ({ isChanging, sendInfo }) => {
+const MyRoom = (
+	{ isChanging, sendInfo, advertisement } = { advertisement: {} }
+) => {
+	console.log(advertisement);
 	const refLocation = useRef(null);
 	const refPrice = useRef(null);
 	const refSleepingPlaces = useRef(null);
@@ -57,26 +60,30 @@ const MyRoom = ({ isChanging, sendInfo }) => {
 
 							<ul className="caption__text">
 								<li className="caption__text-item">
-									Location: {MY_ROOM.location}
-								</li>
-
-								<li className="caption__text-item">Price: {MY_ROOM.price}</li>
-
-								<li className="caption__text-item">
-									Living space: {MY_ROOM.livingSpace} sq. m.
+									Location: {advertisement.location}
 								</li>
 
 								<li className="caption__text-item">
-									Bathrooms: {MY_ROOM.bathRooms}
+									Price: {advertisement.price}
 								</li>
 
 								<li className="caption__text-item">
-									Sleeping places: {MY_ROOM.sleepingPlaces}
+									Living space: {advertisement.livingSpace} sq. m.
+								</li>
+
+								<li className="caption__text-item">
+									Bathrooms: {advertisement.bathRooms}
+								</li>
+
+								<li className="caption__text-item">
+									Sleeping places: {advertisement.sleepingPlaces}
 								</li>
 							</ul>
 						</div>
 
-						<div className="caption__description">{MY_ROOM.description}</div>
+						<div className="caption__description">
+							{advertisement.description}
+						</div>
 					</div>
 
 					<ul className="main__pictures">{mainPicturesList}</ul>
@@ -88,22 +95,37 @@ const MyRoom = ({ isChanging, sendInfo }) => {
 					<ul className="main-changing__text">
 						<li className="main-changing__text-item">
 							<span>Location:</span>
-							<FormControl ref={refLocation} />
+							<FormControl
+								ref={refLocation}
+								defaultValue={advertisement.location}
+							/>
 						</li>
 
 						<li className="main-changing__text-item">
 							<span>Price:</span>
-							<FormControl ref={refPrice} />
+							<FormControl
+								ref={refPrice}
+								type="number"
+								defaultValue={advertisement.price}
+							/>
 						</li>
 
 						<li className="main-changing__text-item">
 							<span>Sleeping places:</span>
-							<FormControl ref={refSleepingPlaces} />
+							<FormControl
+								ref={refSleepingPlaces}
+								type="number"
+								defaultValue={advertisement.sleepingPlaces}
+							/>
 						</li>
 
 						<li className="main-changing__text-item">
 							<span>Description:</span>
-							<FormControl as="textarea" ref={refDescription} />
+							<FormControl
+								as="textarea"
+								ref={refDescription}
+								defaultValue={advertisement.description}
+							/>
 						</li>
 					</ul>
 
