@@ -1,13 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
 
 import Header from '../_commonComponents/Header/Header';
 import Information from './Information/Information';
 import MyRoom from './MyRoom/MyRoom';
 
+import { serverGetAccount, serverPutAccount } from '../../func/account';
 const Profile = () => {
 	const [isInformationChanges, setIsInformationChanges] = useState(false);
 	const [isSaveClicked, setIsSaveClicked] = useState(false);
+
+	const [userData, setUserData] = useState({});
+	useEffect(() => {
+		const fetchData = async () => {
+			const accountData = await serverGetAccount();
+			if (accountData.isSuccess) setUserData(accountData.data);
+		};
+		fetchData();
+	}, []);
 
 	const startChanging = () => {
 		setIsInformationChanges(true);
@@ -20,6 +30,8 @@ const Profile = () => {
 
 	// Get info from Information component
 	const informationDataHandler = (info) => {
+		setImmediate(() => setUserData(info));
+		serverPutAccount(info);
 		if (!isSaveClicked) {
 			return;
 		}
@@ -40,6 +52,7 @@ const Profile = () => {
 
 			<div className="profile__information">
 				<Information
+					userData={userData}
 					isChanging={isInformationChanges}
 					sendInfo={informationDataHandler}
 				/>
