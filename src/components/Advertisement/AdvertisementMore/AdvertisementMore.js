@@ -9,19 +9,15 @@ import {
 	getUserName,
 	setAccountId,
 	getToken,
-	getAdvertisementMore
+	getAdvertisementMore,
 } from '../../../func/local-storage';
 
 const AdvertisementMore = () => {
 	const history = useHistory();
-	
+
 	const userName = getUserName();
-	const data = getAdvertisementMore();	
-	const {
-		location,
-		description,
-		sleepingPlaces
-	} = data;
+	const data = getAdvertisementMore();
+	const { location, description, sleepingPlaces } = data;
 
 	const mainPicturesList = MY_ROOM.photoes.map((item, index) => {
 		if (index === 0) {
@@ -48,20 +44,24 @@ const AdvertisementMore = () => {
 							</div>
 
 							<ul className="caption__text">
-								<li className="caption__text-item">
-									Location: {location}
-								</li>
+								<li className="caption__text-item">Location: {location}</li>
 
-								{false && <li className="caption__text-item">Price: {MY_ROOM.price}</li>}
+								{false && (
+									<li className="caption__text-item">Price: {MY_ROOM.price}</li>
+								)}
 
-								{false && <li className="caption__text-item">
-									Living space: {MY_ROOM.livingSpace} sq. m.
-								</li>}
+								{false && (
+									<li className="caption__text-item">
+										Living space: {MY_ROOM.livingSpace} sq. m.
+									</li>
+								)}
 
-								{false && <li className="caption__text-item">
-									Bathrooms: {MY_ROOM.bathRooms}
-								</li>}
-								
+								{false && (
+									<li className="caption__text-item">
+										Bathrooms: {MY_ROOM.bathRooms}
+									</li>
+								)}
+
 								<li className="caption__text-item">
 									Sleeping places: {sleepingPlaces}
 								</li>
