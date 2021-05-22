@@ -1,23 +1,11 @@
-import { useEfect } from 'react';
-import { useHistory } from 'react-router-dom';
-
 import Header from '../../_commonComponents/Header/Header';
 import { USER, MY_ROOM } from '../../../constants/main.js';
 import Picture from '../../_commonComponents/Picture/Picture';
 
-import {
-	getUserName,
-	setAccountId,
-	getToken,
-	getAdvertisementMore,
-} from '../../../func/local-storage';
+const AdvertisementMore = (props) => {
+	const advertisementDetails = props.location.state || {};
 
-const AdvertisementMore = () => {
-	const history = useHistory();
-
-	const userName = getUserName();
-	const data = getAdvertisementMore();
-	const { location, description, sleepingPlaces } = data;
+	const { location, description, sleepingPlaces } = advertisementDetails;
 
 	const mainPicturesList = MY_ROOM.photoes.map((item, index) => {
 		if (index === 0) {
@@ -84,7 +72,7 @@ const AdvertisementMore = () => {
 								alt="Figure"
 							/>
 							<div className="header__text">
-								<p className="text__item">{userName} Style</p>
+								<p className="text__item">userName Style</p>
 								<p className="text__item">{location}</p>
 							</div>
 						</header>

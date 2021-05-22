@@ -2,11 +2,7 @@ import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
-import {
-	setAccountId,
-	getToken,
-	setAdvertisementMore,
-} from '../../func/local-storage';
+import { setAccountId, getToken } from '../../func/local-storage';
 
 import { ADVERTISEMENT } from '../../constants/main.js';
 import { serverGetAccountId } from '../../func/signUp';
@@ -40,11 +36,11 @@ const Advertisement = () => {
 		});
 	}, []);
 
-	const clickMoreHandler = (data) => {
-		setAdvertisementMore(data);
-
-		history.push('/advertisement-more');
-	};
+	const clickMoreHandler = (data) =>
+		history.push({
+			pathname: '/advertisement-more',
+			state: data,
+		});
 
 	const filterHandler = (info) => {
 		console.log(info);
