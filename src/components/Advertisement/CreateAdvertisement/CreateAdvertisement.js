@@ -4,14 +4,12 @@ import { Button, FormControl } from 'react-bootstrap';
 import Header from '../../_commonComponents/Header/Header';
 import ImageLoader from '../../_commonComponents/ImageLoader/ImageLoader';
 
-import { getJWT } from '../../../func/local-storage';
-
 import { createAdvetritesement } from '../../../func/createAdvetritesement';
 
 const CreateAdvertisement = () => {
 	const refImageLoader = useRef(null);
 	const [imageLoaderShow, setImageLoaderShow] = useState(false);
-
+	
 	const createAdvetritesementHandler = async () => {
 		const result = await createAdvetritesement({
 			location: 'Kyiv Улица',
