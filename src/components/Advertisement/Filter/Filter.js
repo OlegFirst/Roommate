@@ -1,8 +1,6 @@
 import { useRef } from 'react';
 import { FormControl, Button } from 'react-bootstrap';
 
-import { filter } from '../../../func/advertisement';
-
 const Filter = ({ sendInfo }) => {
 	const refCity = useRef(null);
 	const refRooms = useRef(null);
@@ -15,13 +13,8 @@ const Filter = ({ sendInfo }) => {
 			sleepingPlacesMin: refRooms.current.value,
 			priceMax: refPrice.current.value,
 			people: refPeople.current.value,
-			limit: 10,
-			skip: 0
 		};
-		
-		filter(data, ({ isSuccess, data }) => {
-			sendInfo({isSuccess, data});
-		});
+		sendInfo(data);
 	};
 
 	return (

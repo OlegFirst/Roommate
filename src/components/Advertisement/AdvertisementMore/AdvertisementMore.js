@@ -2,10 +2,11 @@ import Header from '../../_commonComponents/Header/Header';
 import { USER, MY_ROOM } from '../../../constants/main.js';
 import Picture from '../../_commonComponents/Picture/Picture';
 
-const AdvertisementMore = props => {
+import AdvertisementAuthor from './AdvertisementAuthor';
+const AdvertisementMore = (props) => {
 	const advertisementDetails = props.location.state || {};
-
-	const { location, description, sleepingPlaces } = advertisementDetails;
+	const { location, description, sleepingPlaces, accountId } =
+		advertisementDetails;
 
 	const mainPicturesList = MY_ROOM.photoes.map((item, index) => {
 		if (index === 0) {
@@ -64,24 +65,7 @@ const AdvertisementMore = props => {
 
 				<div className="advertisement-more__right right">
 					Information about roommate:
-					<div className="right__text text">
-						<header className="right__header header">
-							<img
-								className="header__figure"
-								src="images/my-room/figure_white.png"
-								alt="Figure"
-							/>
-							<div className="header__text">
-								<p className="text__item">userName Style</p>
-								<p className="text__item">{location}</p>
-							</div>
-						</header>
-
-						<main className="right__main">
-							<p className="main__item">Phone number: {USER.phoneNumber}</p>
-							<p className="main__item">Email: {USER.eMail}</p>
-						</main>
-					</div>
+					<AdvertisementAuthor accountId={accountId} />
 				</div>
 			</div>
 		</section>
