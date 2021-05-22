@@ -1,36 +1,50 @@
 import { useRef, useEffect, useState } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
-
+// import {	
+	// ADVERTISEMENT
+// } from '../../constants/main.js';
 import Header from '../../_commonComponents/Header/Header';
 import ImageLoader from '../../_commonComponents/ImageLoader/ImageLoader';
 
 import {
-	getJWT
+	setAccountId	
 } from '../../../func/local-storage';
-
-import {
-	createAdvetritesement	
-} from '../../../func/advertisement';
 
 const CreateAdvertisement = () => {
 	const refImageLoader = useRef(null);
-	const [imageLoaderShow, setImageLoaderShow] = useState(false);	
+	const [imageLoaderShow, setImageLoaderShow] = useState(false);
 	
-	const token = getJWT();
-	
-	useEffect(() => {
-		createAdvetritesement(token, ({ isSuccess, data }) => {
-			if (isSuccess) {				
-				console.log(data)
-			} else {
-				alert('Error');
-			}
-		})
-	}, []);
+	//const imageToBase64 = require('image-to-base64');	
 	
 	const one = () => {
 		console.log(refImageLoader.current);
 	};
+	
+	// imageToBase64('./image1.jpg')
+		// .then(
+			// response => {
+				// console.log(response);
+			// }
+		// )
+		// .catch(
+			// error => {
+				// console.log(error);
+			// }
+		// )
+	
+	// useEffect(() => {
+		// console.clear();
+		
+		// refImageLoader.current.addEventListener('change', function() {
+			// if (this.files && this.files[0]) {
+				// let image = document.querySelector('#myImg');
+				// image.onload = () => {
+					// URL.revokeObjectURL(image.src);
+				// }
+   			// image.src = URL.createObjectURL(this.files[0]);
+			// }
+		// });
+	// }, []);
 	
 	const imageLoaderClose = () => {
 		setImageLoaderShow(false);

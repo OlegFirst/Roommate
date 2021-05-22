@@ -5,8 +5,10 @@ import { Button } from 'react-bootstrap';
 import {	
 	ADVERTISEMENT
 } from '../../constants/main.js';
+
 import {
-	setAccountId	
+	setAccountId,
+	getJWT
 } from '../../func/local-storage';
 
 import { serverGetAccountId } from '../../func/signUp';
@@ -20,9 +22,9 @@ const Advertisement = () => {
 	const [apartment, setAapartment] = useState([]);
 	const history = useHistory();
 	
+	const token = getJWT()
+	
 	useEffect(() => {
-		const token = localStorage.getItem("protect_JWT");
-		
 		// Get account id and all posts
 		serverGetAccountId(token, ({ isSuccess, data }) => {
 			if (isSuccess) {

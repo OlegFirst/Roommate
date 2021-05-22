@@ -18,3 +18,25 @@ export const getAllPosts = ( accountId, readed ) => {
     }
   );
 };
+
+export const createAdvetritesement = ( token, readed ) => {
+	axios.post(hostName + 'listing/create', {
+		headers: {
+			"Authorization": `Bearer ${token}`
+		}
+	})
+  .then(res => {
+    readed({				
+				isSuccess: true,        
+				data: res.data.data
+      });
+    }
+  )
+  .catch(err => {
+		  readed({
+        isSuccess: false,
+        data: null
+      });
+    }
+  );
+};
