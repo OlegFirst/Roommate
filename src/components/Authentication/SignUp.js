@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Button, FormControl } from 'react-bootstrap';
 
 import { LOGO_ICON } from '../../constants/main.js';
-import { setUserName } from '../../func/local-storage';
+import { setUserName, setToken } from '../../func/local-storage';
 import { serverSingUp } from '../../func/signUp';
 
 import Mail from '../_commonComponents/Mail/Mail';
@@ -41,7 +41,7 @@ const SignUp = () => {
 		serverSingUp(arg, ({ isSuccess, data }) => {
 			if (isSuccess) {
 				const JWT = data.data.jwt;
-				localStorage.setItem('JWT', JWT);
+				setToken(JWT);
 				//localStorage.setItem("protect_userName", name);
 				setUserName(name);
 				history.push('/advertisement');
