@@ -2,52 +2,46 @@ import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
-import { setAccountId, getToken } from '../../func/local-storage';
-
-import { ADVERTISEMENT } from '../../constants/main.js';
-import { serverGetAccountId } from '../../func/signUp';
-import { getAllPosts, filter } from '../../func/advertisement';
+import axios from '../../func/axios';
 
 import Header from '../_commonComponents/Header/Header';
 import Filter from './Filter/Filter';
 import Picture from '../_commonComponents/Picture/Picture';
 
-const Advertisement = () => {
+const Advertisement = (props) => {
+	// const url = new URLSearchParams(props.location.search);
+	// const initialSkip = Number(url.get('skip') || 0);
 	const [apartment, setApartment] = useState([]);
+	const [filters, setFilters] = useState({});
 	const history = useHistory();
-
-	const token = getToken();
-
+	const fetchMore = (after = 0) => {
+		axios
+			.post(`listing/find?skip=${after}`, filters)
+			.then(({ data }) => {
+				if (data.data) {
+					if (after === 0) setApartment(data.data);
+					else setApartment([...apartment, ...data.data]);
+				}
+			})
+			.catch(console.warn);
+	};
 	useEffect(() => {
-		// Get account id and all posts
-		serverGetAccountId(token, ({ isSuccess, data }) => {
-			if (isSuccess) {
-				const accountId = data.data.accountId;
-				setAccountId(accountId);
-
-				getAllPosts(accountId, ({ isSuccess, data }) => {
-					if (isSuccess) {
-						setApartment(data);
-					} else {
-						alert('Error');
-					}
-				});
-			}
-		});
-	}, []);
+		fetchMore();
+	}, [filters]);
 
 	const clickMoreHandler = (data) =>
 		history.push({
 			pathname: '/advertisement-more',
-			state: data,
+			state: data
 		});
 
-	const filterHandler = ({ isSuccess, data }) => {
-		if (!isSuccess) {
-			alert("Error");
-			return;
-		}
-		setApartment(data);
+	const filterHandler = (info) => {
+		setFilters({
+			location: info.location,
+			sleepingPlacesMin: info.sleepingPlacesMin,
+			priceMax: info.priceMax,
+			people: info.people,
+		});
 	};
 
 	// TO DO : Photos!
@@ -61,14 +55,13 @@ const Advertisement = () => {
 				</div>
 				<div className="apartment__text">
 					<p>{location}</p>
-					Number of rooms:{sleepingPlaces}. {description}
+					Number of rooms: {sleepingPlaces}.<br />
+					{description}
 					<div>
 						<Button
 							className="button-line"
 							variant="outline-secondary"
-							onClick={() =>
-								clickMoreHandler({ location, description, sleepingPlaces })
-							}
+							onClick={() => clickMoreHandler(item)}
 						>
 							More
 						</Button>
@@ -86,6 +79,7 @@ const Advertisement = () => {
 				{apartment.length > 0 && (
 					<ul className="advertisement__apartments apartments">
 						{apartmentList}
+						<Button onClick={() => fetchMore(apartment.length)}> more</Button>
 					</ul>
 				)}
 
