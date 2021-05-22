@@ -10,7 +10,7 @@ import {
 
 import { ADVERTISEMENT } from '../../constants/main.js';
 import { serverGetAccountId } from '../../func/signUp';
-import { getAllPosts } from '../../func/advertisement';
+import { getAllPosts, filter } from '../../func/advertisement';
 
 import Header from '../_commonComponents/Header/Header';
 import Filter from './Filter/Filter';
@@ -41,13 +41,23 @@ const Advertisement = () => {
 	}, []);
 
 	const clickMoreHandler = data => {
-		setAdvertisementMore(data);
-		
-		history.push('/advertisement-more')
-	}
+		setAdvertisementMore(data);		
+		history.push('/advertisement-more');
+	};
 	
-	const filterHandler = (info) => {
-		console.log(info);
+	const filterHandler = ({ isSuccess, data }) => {
+		// if (!isSuccess) {
+			// alert("Error");
+			// return;			
+		// }
+		
+		console.log(isSuccess, data)
+		
+		// if (!result.isSuccess) {
+			// alert("Error");
+		// } else {
+			// console.log(result);
+		// }
 	};
 	
 	// TO DO : Photos!

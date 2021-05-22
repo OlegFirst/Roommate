@@ -31,6 +31,8 @@ const Authentication = ({ role = 'sign-in' }) => {
 		};
 
 		serverSingIn(arg, ({ isSuccess, data }) => {
+			console.log(data)
+			
 			if (isSuccess) {
 				const JWT = data.data.jwt;
 				setToken(JWT);
