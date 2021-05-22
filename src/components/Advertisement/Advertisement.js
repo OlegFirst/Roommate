@@ -17,6 +17,7 @@ import Filter from './Filter/Filter';
 import Picture from '../_commonComponents/Picture/Picture';
 
 const Advertisement = () => {
+	const [apartment, setAapartment] = useState([]);
 	const history = useHistory();
 	
 	useEffect(() => {
@@ -25,8 +26,7 @@ const Advertisement = () => {
 		// Get account id and all posts
 		serverGetAccountId(token, ({ isSuccess, data }) => {
 			if (isSuccess) {
-				const accountId = data.data.accountId;
-				//localStorage.setItem("protect_accountId", accountId);
+				const accountId = data.data.accountId;				
 				setAccountId(accountId);
 				
 				getAllPosts(accountId, ({ isSuccess, data }) => {			
@@ -66,9 +66,21 @@ const Advertisement = () => {
 			<Header />
 			
 			<main className="advertisement__main main">
+			{
+				apartment.length > 0
+				&&
 				<ul className="advertisement__apartments apartments">
 					{apartmentList}
 				</ul>
+			}
+			
+			{
+				apartment.length == 0
+				&&
+				<ul className="advertisement__apartments apartments">
+					EMPTY
+				</ul>
+			}
 				
 				<div className="advertisement__filter">
 					<Filter sendInfo={filterHandler} />
