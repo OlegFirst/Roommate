@@ -6,7 +6,7 @@ import { Button, FormControl } from 'react-bootstrap';
 import Header from '../../_commonComponents/Header/Header';
 import ImageLoader from '../../_commonComponents/ImageLoader/ImageLoader';
 
-import { setAccountId } from '../../func/local-storage';
+import { setAccountId } from '../../../func/local-storage';
 
 const CreateAdvertisement = () => {
 	const refImageLoader = useRef(null);
