@@ -41,7 +41,7 @@ const SignUp = () => {
 		serverSingUp(arg, ({ isSuccess, data }) => {
 			if (isSuccess) {
 				const JWT = data.data.jwt;
-				localStorage.setItem('protect_JWT', JWT);
+				localStorage.setItem('JWT', JWT);
 				//localStorage.setItem("protect_userName", name);
 				setUserName(name);
 				history.push('/advertisement');

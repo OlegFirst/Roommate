@@ -3,11 +3,11 @@ export const setUserName = (name) => {
 };
 
 export const getJWT = () => {
-	localStorage.getItem("protect_JWT");
+	localStorage.getItem('JWT');
 };
 
-export const setAccountId = accountId => {
-	localStorage.setItem("protect_accountId", accountId);
+export const setAccountId = (accountId) => {
+	localStorage.setItem('protect_accountId', accountId);
 };
 
 export const getAccountId = () => {
