@@ -4,34 +4,28 @@ import { Button, FormControl } from 'react-bootstrap';
 import Header from '../../_commonComponents/Header/Header';
 import ImageLoader from '../../_commonComponents/ImageLoader/ImageLoader';
 
-import {
-	getJWT
-} from '../../../func/local-storage';
+import { getJWT } from '../../../func/local-storage';
 
-import {
-	createAdvetritesement	
-} from '../../../func/advertisement';
+import { createAdvetritesement } from '../../../func/createAdvetritesement';
 
 const CreateAdvertisement = () => {
 	const refImageLoader = useRef(null);
-	const [imageLoaderShow, setImageLoaderShow] = useState(false);	
-	
-	const token = getJWT();
-	
-	useEffect(() => {
-		createAdvetritesement(token, ({ isSuccess, data }) => {
-			if (isSuccess) {				
-				console.log(data)
-			} else {
-				alert('Error');
-			}
-		})
-	}, []);
-	
+	const [imageLoaderShow, setImageLoaderShow] = useState(false);
+
+	const createAdvetritesementHandler = async () => {
+		const result = await createAdvetritesement({
+			location: 'Kyiv Улица',
+			price: 5000,
+			sleepingPlaces: 1,
+			description: 'Text',
+		});
+		console.dir(result);
+	};
+
 	const one = () => {
 		console.log(refImageLoader.current);
 	};
-	
+
 	const imageLoaderClose = () => {
 		setImageLoaderShow(false);
 	};
@@ -87,7 +81,11 @@ const CreateAdvertisement = () => {
 				</div>
 
 				<div className="pictures__footer">
-					<Button className="button-outline" variant="outline-secondary">
+					<Button
+						onClick={createAdvetritesementHandler}
+						className="button-outline"
+						variant="outline-secondary"
+					>
 						Create
 					</Button>
 				</div>
