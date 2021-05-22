@@ -10,15 +10,16 @@ const Filter = ({ sendInfo }) => {
 	const refPeople = useRef(null);
 
 	const findClicked = () => {
-		const res = {
-			city: refCity.current.value,
-			rooms: refRooms.current.value,
-			price: refPrice.current.value,
+		const data = {
+			location: refCity.current.value,
+			sleepingPlacesMin: refRooms.current.value,
+			priceMax: refPrice.current.value,
 			people: refPeople.current.value,
+			limit: 10,
+			skip: 0
 		};
 		
-		filter("", ({ isSuccess, data }) => {
-			console.log(data)
+		filter(data, ({ isSuccess, data }) => {
 			sendInfo({isSuccess, data});
 		});
 	};

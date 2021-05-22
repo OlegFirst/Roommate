@@ -42,8 +42,12 @@ const Advertisement = () => {
 			state: data,
 		});
 
-	const filterHandler = (info) => {
-		console.log(info);
+	const filterHandler = ({ isSuccess, data }) => {
+		if (!isSuccess) {
+			alert("Error");
+			return;
+		}
+		setApartment(data);
 	};
 
 	// TO DO : Photos!

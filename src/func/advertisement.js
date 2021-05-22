@@ -19,14 +19,14 @@ export const getAllPosts = ( accountId, readed ) => {
   );
 };
 
-export const filter = (arg, readed) => {
-	const data = {
-		location: 'w',
-		priceMax: 9000,
-		sleepingPlacesMin: 1,
-		limit: 10,
-		skip: 0
-	}
+export const filter = (data, readed) => {
+	// const data = {
+		// location: 'w',
+		// priceMax: 9000,
+		// sleepingPlacesMin: 1,
+		// limit: 10,
+		// skip: 0
+	// }
 	
 	axios.post('listing/find/', data)
 	.then(res => {
