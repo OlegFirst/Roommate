@@ -4,7 +4,9 @@ import Picture from '../../_commonComponents/Picture/Picture';
 
 const AdvertisementMore = props => {
 	const advertisementDetails = props.location.state || {};
-
+	
+	console.log(advertisementDetails);
+	
 	const { location, description, sleepingPlaces } = advertisementDetails;
 
 	const mainPicturesList = MY_ROOM.photoes.map((item, index) => {
