@@ -1,16 +1,20 @@
 import { useHistory } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
 import {	
 	ADVERTISEMENT
 } from '../../constants/main.js';
-import Header from '../_commonComponents/Header/Header';
-import Filter from './Filter/Filter';
-import Picture from '../_commonComponents/Picture/Picture';
+import {
+	setAccountId	
+} from '../../func/local-storage';
 
 import { serverGetAccountId } from '../../func/signUp';
 import { getAllPosts } from '../../func/advertisement';
+
+import Header from '../_commonComponents/Header/Header';
+import Filter from './Filter/Filter';
+import Picture from '../_commonComponents/Picture/Picture';
 
 const Advertisement = () => {
 	const history = useHistory();
@@ -22,11 +26,12 @@ const Advertisement = () => {
 		serverGetAccountId(token, ({ isSuccess, data }) => {
 			if (isSuccess) {
 				const accountId = data.data.accountId;
-				localStorage.setItem("protect_accountId", accountId);
+				//localStorage.setItem("protect_accountId", accountId);
+				setAccountId(accountId);
 				
 				getAllPosts(accountId, ({ isSuccess, data }) => {			
 					if (isSuccess) {				
-						//console.log(data)
+						console.log(data)
 					} else {
 						alert('Error');
 					}

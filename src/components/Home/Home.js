@@ -57,5 +57,3 @@ const Home = () => {
 }
 
 export default Home;
-
-// <Button id="header__buttons-first" variant="secondary">Sign Up</Button>

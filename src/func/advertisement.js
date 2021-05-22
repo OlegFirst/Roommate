@@ -6,7 +6,7 @@ export const getAllPosts = ( accountId, readed ) => {
   .then(res => {
     readed({				
 				isSuccess: true,        
-				data: res.data
+				data: res.data.data
       });
     }
   )
