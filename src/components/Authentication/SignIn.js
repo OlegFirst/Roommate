@@ -34,8 +34,7 @@ const Authentication = ({ role = 'sign-in' }) => {
 			if (isSuccess) {
 				const JWT = data.data.jwt;
 				setToken(JWT);
-				setUserName(name);
-				//localStorage.setItem("protect_userName", name);
+				setUserName(name);				
 				history.push('/advertisement');
 			} else {
 				alert('Error');

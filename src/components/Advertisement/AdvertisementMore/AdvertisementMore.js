@@ -1,11 +1,27 @@
+import { useEfect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Header from '../../_commonComponents/Header/Header';
 import { USER, MY_ROOM } from '../../../constants/main.js';
 import Picture from '../../_commonComponents/Picture/Picture';
 
+import {
+	getUserName,
+	setAccountId,
+	getToken,
+	getAdvertisementMore
+} from '../../../func/local-storage';
+
 const AdvertisementMore = () => {
 	const history = useHistory();
+	
+	const userName = getUserName();
+	const data = getAdvertisementMore();	
+	const {
+		location,
+		description,
+		sleepingPlaces
+	} = data;
 
 	const mainPicturesList = MY_ROOM.photoes.map((item, index) => {
 		if (index === 0) {
@@ -33,26 +49,26 @@ const AdvertisementMore = () => {
 
 							<ul className="caption__text">
 								<li className="caption__text-item">
-									Location: {MY_ROOM.location}
+									Location: {location}
 								</li>
 
-								<li className="caption__text-item">Price: {MY_ROOM.price}</li>
+								{false && <li className="caption__text-item">Price: {MY_ROOM.price}</li>}
 
-								<li className="caption__text-item">
+								{false && <li className="caption__text-item">
 									Living space: {MY_ROOM.livingSpace} sq. m.
-								</li>
+								</li>}
 
-								<li className="caption__text-item">
+								{false && <li className="caption__text-item">
 									Bathrooms: {MY_ROOM.bathRooms}
-								</li>
-
+								</li>}
+								
 								<li className="caption__text-item">
-									Sleeping places: {MY_ROOM.sleepingPlaces}
+									Sleeping places: {sleepingPlaces}
 								</li>
 							</ul>
 						</div>
 
-						<div className="caption__description">{MY_ROOM.description}</div>
+						<div className="caption__description">{description}</div>
 					</div>
 
 					<ul className="main__pictures">{mainPicturesList}</ul>
@@ -68,8 +84,8 @@ const AdvertisementMore = () => {
 								alt="Figure"
 							/>
 							<div className="header__text">
-								<p className="text__item">{USER.name} Style</p>
-								<p className="text__item">{USER.location}</p>
+								<p className="text__item">{userName} Style</p>
+								<p className="text__item">{location}</p>
 							</div>
 						</header>
 

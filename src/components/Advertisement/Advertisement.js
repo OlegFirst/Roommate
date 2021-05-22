@@ -4,7 +4,8 @@ import { Button } from 'react-bootstrap';
 
 import {
 	setAccountId,
-	getJWT
+	getToken,
+	setAdvertisementMore
 } from '../../func/local-storage';
 
 import { ADVERTISEMENT } from '../../constants/main.js';
@@ -16,10 +17,10 @@ import Filter from './Filter/Filter';
 import Picture from '../_commonComponents/Picture/Picture';
 
 const Advertisement = () => {
-	const [apartment, setAapartment] = useState([]);
+	const [apartment, setApartment] = useState([]);
 	const history = useHistory();
 	
-	const token = getJWT();
+	const token = getToken();
 
 	useEffect(() => {		
 		// Get account id and all posts
@@ -30,7 +31,7 @@ const Advertisement = () => {
 
 				getAllPosts(accountId, ({ isSuccess, data }) => {
 					if (isSuccess) {
-						console.log(data);
+						setApartment(data);
 					} else {
 						alert('Error');
 					}
@@ -39,26 +40,39 @@ const Advertisement = () => {
 		});
 	}, []);
 
+	const clickMoreHandler = data => {
+		setAdvertisementMore(data);
+		
+		history.push('/advertisement-more')
+	}
+	
 	const filterHandler = (info) => {
 		console.log(info);
 	};
-
-	const apartmentList = ADVERTISEMENT.map((item, index) => {
+	
+	// TO DO : Photos!
+	
+	const apartmentList = apartment.map((item, index) => {
+		const {
+			location,
+			description,
+			sleepingPlaces
+		} = item;
 		return (
 			<li className="apartments__apartment apartment" key={index}>
 				<div className="apartment__picture">
-					<Picture url={item.photoes[0]} />
+				{false && <Picture url={item.photoes[0]} />}
 				</div>
 				<div className="apartment__text">
 					<p>
-						{item.location} {item.street}
+						{location}
 					</p>
-					{item.description}
+					Number of rooms:{sleepingPlaces}. {description}
 					<div>
 						<Button
 							className="button-line"
 							variant="outline-secondary"
-							onClick={() => history.push('/advertisement-more')}
+							onClick={() => clickMoreHandler({	location, description, sleepingPlaces })}
 						>
 							More
 						</Button>

@@ -1,0 +1,3 @@
+'AdvertisementMore':
+- GET
+userName, location, Phone number: {USER.phoneNumber}, Email: {USER.eMail}, pictures;

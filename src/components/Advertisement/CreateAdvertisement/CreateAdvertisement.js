@@ -29,11 +29,15 @@ const CreateAdvertisement = () => {
 		const result = await createAdvetritesement(data);
 		if (!result.isSuccess) {
 			alert("Error");
+		} else {
+			alert("Created");
+			refLocation.current.value = '';
+			refStreet.current.value = '';
+			refPrice.current.value = '';
+			refNumberPeople.current.value = '';
+			refNumberOfRooms.current.value = '';
+			refDescription.current.value = '';
 		}
-	};
-
-	const one = () => {
-		console.log(refImageLoader.current);
 	};
 
 	const imageLoaderClose = () => {
