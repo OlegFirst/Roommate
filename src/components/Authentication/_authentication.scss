@@ -1,0 +1,54 @@
+.authentication {
+	@include flex();
+	flex-direction: column;
+
+	&__logo {
+		box-shadow: 0 4px 8px 0 lightgrey;
+		border-radius: 4px;
+		width: 100%;
+		max-width: 420px;
+	}
+	
+	&__form {
+		@include flex();
+		flex-direction: column;
+		background-color: $color-brown;
+		border: 3px solid $color-brown_dark;
+		width: 100%;
+		max-width: 400px;
+		margin-top: 50px;
+		padding: 40px;
+		
+		& .form {
+			&__figure {
+				height: 70px;
+				
+				& > img {
+					height: 100%;
+					width: auto;
+				}
+			}
+		
+			&__row {
+				@include flex();
+				height: 40px;
+				margin-top: 20px;
+			}
+			
+			&__button {
+				margin-top: 50px;
+				
+				& > button {
+					background-color: $color-brown_dark;
+					border: none;
+					padding: 5px 40px;
+				}
+			}
+		}
+	}
+}
+
+.lock-closed + input {
+	position: relative;
+	left: 7px;
+}

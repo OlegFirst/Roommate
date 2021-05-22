@@ -1,0 +1,50 @@
+body {
+	color: $color-brown_dark;
+  font-family: 'Roboto', sans-serif;
+  max-width: 2000px;
+	min-width: 240px;
+  box-sizing: border-box;
+  font-size: 25px;
+	margin: 0 auto;	
+}
+
+#root {
+	width: 80%;
+	margin: 0 auto;
+	padding: 40px 0;
+	
+	@include responsive(xs) {
+		width: 90%;
+	}
+}
+
+p {
+	margin-bottom: 0;
+}
+
+.button-outline {
+	color: $color-brown_dark;
+	border: 3px solid $color-brown;
+}
+
+.button-free {
+	color: $color-brown_dark;
+	font-weight: bold;
+	background-color: inherit;
+	border: none;
+}
+
+.button-line {
+	color: $color-brown_dark;
+	font-weight: bold;
+	background-color: inherit;
+	border-radius: 0;
+	border: none;
+	border-bottom: 3px solid $color-brown;
+}
+
+.button-brown {
+	background-color: $color-brown_dark;
+	border: none;
+	color: #ffffff;
+}

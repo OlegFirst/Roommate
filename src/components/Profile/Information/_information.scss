@@ -1,0 +1,35 @@
+.information {
+	@include flex();
+	align-items: flex-start;
+	
+	&__figure {
+		width: 100px;
+		height: auto;
+		margin-right: 80px;
+	}
+	
+	&__text {
+		width: 400px;
+	
+		& .text {
+			&__title {
+				font-weight: bold;
+			}
+			
+			&__items {
+				padding-left: 0;
+			}
+			
+			&__item {
+				@include flex();
+				justify-content: space-between;
+				list-style-type: none;
+				margin-bottom: 10px;
+				
+				& > input {
+					width: 200px;
+				}
+			}
+		}	
+	}
+}

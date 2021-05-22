@@ -1,0 +1,11 @@
+.lock-opened {	
+	height: 100%;
+	margin-right: 25px;
+	
+	&__icon {
+		position: relative;
+		height: 80%;
+		width: auto;
+		top: -2px;
+	}
+}

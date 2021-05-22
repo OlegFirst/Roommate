@@ -1,0 +1,46 @@
+.admin {
+	&__apartments {
+		margin-top: 40px;
+	
+		& .apartments {
+			&__apartment {
+				position: relative;
+				@include flex();
+				justify-content: space-between;
+				margin-bottom: 40px;
+				align-items: flex-start;
+				border: 2px solid #c5ced6;
+				border-radius: 4px;
+				padding: 20px;
+				padding-right: 100px;
+			
+				& .apartment {
+					&__picture {						
+						min-width: 150px;
+					}
+					
+					&__text {
+						color: $color-black;
+						padding-left: 20px;
+
+						& > div > button {
+							float: right;
+						}
+					}
+					
+					&__buttons {
+						position: absolute;
+						@include flex();
+						flex-direction: column;
+						right: 20px;
+						top: 20px;
+						
+						& > button {
+							margin-bottom: 20px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

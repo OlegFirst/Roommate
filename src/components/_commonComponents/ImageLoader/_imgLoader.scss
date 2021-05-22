@@ -1,0 +1,11 @@
+.image-loader {
+	&__block {
+		width: 100%;
+		overflow: hidden;
+	}
+
+	&__image {
+		width: 100%;
+		height: auto;
+	}
+}

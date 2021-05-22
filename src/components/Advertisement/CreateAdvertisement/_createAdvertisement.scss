@@ -1,0 +1,34 @@
+.create-advertisement {
+	&__text {
+		margin-top: 40px;
+		padding-left:  0;
+		
+		& .text {
+			&__item {
+				@include flex();
+				justify-content: space-between;
+				list-style-type: none;
+				margin-bottom: 20px;
+				
+				& > span {
+					width: 600px;
+				}
+			}
+		}
+		
+	}
+	
+	&__pictures {
+		& .pictures {
+			&__header {
+				@include flex();
+				justify-content: space-between;
+			}
+			
+			&__footer {
+				@include flex();
+				justify-content: flex-end;
+			}
+		}
+	}
+}

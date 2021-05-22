@@ -1,0 +1,37 @@
+.header-admin {
+	@include flex();
+		justify-content: space-between;
+	
+	& .header-admin {
+		&__logo {
+			box-shadow: 0 4px 8px 0 lightgrey;
+			border-radius: 4px;
+			width: 200px;				
+		}
+		
+		&__buttons {
+			@include flex();
+			
+			& > button {
+				margin-left: 20px;
+			}
+		}
+		
+		&__dropdown {
+			margin-left: 20px;
+		
+			& > button {
+				background-color: #ffffff;
+				
+				&:hover {
+					color: black;
+				}
+			}
+		
+			& > button,
+			& > div {
+				width: 200px;
+			}
+		}
+	}	
+}

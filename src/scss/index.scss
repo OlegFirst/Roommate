@@ -1,0 +1,10 @@
+@import './_variables.scss';
+@import './_mixines.scss';
+@import './_main.scss';
+@import '../components/_commonComponents/_index.scss';
+
+@import '../components/Authentication/_authentication.scss';
+@import '../components/Home/_home.scss';
+@import '../components/Profile/_profile.scss';
+@import '../components/Advertisement/_advertisement.scss';
+@import '../components/Admin/_admin.scss';

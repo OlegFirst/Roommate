@@ -1,0 +1,11 @@
+.lock-closed {	
+	height: 100%;
+	margin-right: 20px;
+	
+	&__icon {
+		position: relative;
+		height: 80%;
+		width: auto;
+		top: -2px;
+	}
+}

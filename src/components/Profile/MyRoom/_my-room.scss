@@ -1,0 +1,114 @@
+.my-room {	
+	&__title {
+		font-weight: bold;
+	}
+	
+	&__main {
+		@include flex();
+		justify-content: space-between;
+		align-items: flex-start;
+		border: 2px solid $color-blue;
+		border-radius: 4px;
+		padding: 30px 40px;
+		
+		$pictures-width: 200px;
+		
+		& .main {
+			&__caption {
+				width: calc(100% - #{$pictures-width});
+				padding-right: 40px;
+				
+				& .caption {
+					&__header {
+						@include flex();
+						justify-content: flex-start;
+						align-items: flex-start;
+					}
+					
+					&__picture {
+						width: 200px;
+					}
+					
+					&__text-item {
+						list-style-type: none;
+					}
+				}
+			}
+			
+			&__pictures {
+				width: $pictures-width;
+				padding-left: 0;
+				margin-bottom: -20px;
+				
+				&-item {
+					list-style-type: none;
+					margin-bottom: 20px;
+				}
+			}
+		}
+	}
+	
+	&__main-changing {
+		.main-changing {
+			&__text {
+				padding-left: 0;
+			}
+		
+			&__text-item {
+				@include flex();
+				justify-content: flex-start;
+				list-style-type: none;
+				margin-bottom: 10px;
+				
+				& > span {
+					width: 100px;
+					margin-right: 40px;
+				}
+				
+				& > input,
+				& > textarea {
+					max-width: 400px;
+				}
+			}
+			
+			&__pictures {
+				margin-top: 20px;
+			
+				& .pictures {
+					&__header {
+						@include flex();
+						justify-content: space-between;
+					}
+					
+					&__items {
+						@include flex();
+						flex-wrap: wrap;
+						padding-left: 0;
+						
+						& .items {
+							&__item {
+								list-style-type: none;
+								width: 120px;
+								margin-right: 40px;
+								
+								& .item {
+									&__inner {
+										@include flex();
+										align-items: flex-start;
+										
+										& > span {
+											margin-left: 10px;
+											font-size: 0.8rem;
+											font-weight: bold;
+											cursor: pointer;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,58 @@
+@import './Filter/_filter.scss';
+@import './CreateAdvertisement/_createAdvertisement.scss';
+@import './AdvertisementMore/_advertisement-more.scss';
+
+.advertisement {
+	$filter-width: 200px;
+	
+	&__title {
+		font-weight: bold;
+		text-align: center;
+		margin-top: 40px;
+	}
+	
+	&__main {
+		@include flex();
+		justify-content: space-between;
+		align-items: flex-start;		
+		margin-top: 40px;
+	}
+	
+	&__apartments {
+		padding-left: 0;
+		margin-bottom: 0;
+		flex-grow: 1;
+		margin-right: 40px;
+	
+		& .apartments {
+			&__apartment {
+				@include flex();
+				justify-content: space-between;
+				margin-bottom: 40px;
+				align-items: flex-start;
+				border: 2px solid #c5ced6;
+				border-radius: 4px;
+				padding: 20px;
+			
+				& .apartment {
+					&__picture {						
+						min-width: 150px;
+					}
+					
+					&__text {
+						padding-left: 20px;
+
+						& > div > button {
+							float: right;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	&__filter {
+		margin-top: 40px;
+		min-width: $filter-width;
+	}
+}
