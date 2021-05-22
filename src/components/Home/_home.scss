@@ -1,44 +1,44 @@
 .home {
 	&__header {
 		position: relative;
-			
+
 		& .header {
 			&__buttons {
 				position: absolute;
 				right: 0;
 				top: 0;
-				
+
 				@include responsive(sm) {
 					position: static;
 				}
-				
+
 				& > button {
 					background-color: $color-brown_dark;
 					border: none;
 					margin-left: 20px;
-					
-					@include responsive(sm) {						
+
+					@include responsive(sm) {
 						margin-bottom: 20px;
-					}			
+					}
 				}
-				
-				#header__buttons-first {					
+
+				#header__buttons-first {
 					margin-left: 0;
 				}
 			}
-		
+
 			&__info {
 				@include flex();
 				flex-direction: column;
 			}
-		
+
 			&__logo {
 				box-shadow: 0 4px 8px 0 lightgrey;
 				border-radius: 4px;
 				width: 100%;
 				max-width: 420px;
 			}
-			
+
 			&__text {
 				margin-top: 40px;
 				max-width: 400px;
@@ -48,7 +48,7 @@
 			}
 		}
 	}
-	
+
 	&__main {
 		& .main {
 			&__row {
@@ -56,16 +56,16 @@
 				margin-bottom: 40px;
 				justify-content: space-between;
 			}
-		
+
 			&__block {
 				width: 30%;
-				
+
 				&-text {
 					width: 30%;
 					text-align: center;
 					font-weight: bold;
 				}
 			}
-		}	
+		}
 	}
 }

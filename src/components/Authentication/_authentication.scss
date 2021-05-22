@@ -8,7 +8,7 @@
 		width: 100%;
 		max-width: 420px;
 	}
-	
+
 	&__form {
 		@include flex();
 		flex-direction: column;
@@ -18,26 +18,26 @@
 		max-width: 400px;
 		margin-top: 50px;
 		padding: 40px;
-		
+
 		& .form {
 			&__figure {
 				height: 70px;
-				
+
 				& > img {
 					height: 100%;
 					width: auto;
 				}
 			}
-		
+
 			&__row {
 				@include flex();
 				height: 40px;
 				margin-top: 20px;
 			}
-			
+
 			&__button {
 				margin-top: 50px;
-				
+
 				& > button {
 					background-color: $color-brown_dark;
 					border: none;

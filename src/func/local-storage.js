@@ -1,5 +1,5 @@
-export const setUserName = name => {
-	localStorage.setItem("protect_userName", name);
+export const setUserName = (name) => {
+	localStorage.setItem('protect_userName', name);
 };
 
 export const getJWT = () => {
@@ -11,5 +11,5 @@ export const setAccountId = accountId => {
 };
 
 export const getAccountId = () => {
-	localStorage.getItem("protect_accountId");
+	localStorage.getItem('protect_accountId');
 };
