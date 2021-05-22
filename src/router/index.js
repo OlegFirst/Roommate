@@ -12,12 +12,16 @@ import Admin from '../components/Admin/Admin';
 export default () => (
 	<Router>
 		<Switch>
-			<Route exact path="/" component={Home} />			
+			<Route exact path="/" component={Home} />
 			<Route exact path="/sign-up" component={SignUp} />
-			<Route exact path="/sign-in" component={SignIn} />			
+			<Route exact path="/sign-in" component={SignIn} />
 			<Route exact path="/profile" component={Profile} />
 			<Route exact path="/advertisement" component={Advertisement} />
-			<Route exact path="/create-advertisement" component={CreateAdvertisement} />
+			<Route
+				exact
+				path="/create-advertisement"
+				component={CreateAdvertisement}
+			/>
 			<Route exact path="/advertisement-more" component={AdvertisementMore} />
 			<Route exact path="/admin" component={Admin} />
 		</Switch>

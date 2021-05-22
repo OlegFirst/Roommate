@@ -2,12 +2,8 @@ import { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, FormControl } from 'react-bootstrap';
 
-import {
-	LOGO_ICON
-} from '../../constants/main.js';
-import {
-	setUserName	
-} from '../../func/local-storage';
+import { LOGO_ICON } from '../../constants/main.js';
+import { setUserName } from '../../func/local-storage';
 import { serverSingUp } from '../../func/signUp';
 
 import Mail from '../_commonComponents/Mail/Mail';
@@ -19,14 +15,14 @@ const SignUp = () => {
 	const refName = useRef(null);
 	const refPassword = useRef(null);
 	const refPasswordConfirm = useRef(null);
-	
+
 	const history = useHistory();
-	
+
 	const clickHandler = () => {
 		const name = refName.current.value;
 		const password = refPassword.current.value;
 		const passwordConfirm = refPasswordConfirm.current.value;
-		
+
 		if (name === '' || password === '' || passwordConfirm === '') {
 			alert('Some data is empty');
 			return;
@@ -36,43 +32,43 @@ const SignUp = () => {
 			alert('You should type the same password');
 			return;
 		}
-		
+
 		const arg = {
 			name,
-			password
+			password,
 		};
-		
+
 		serverSingUp(arg, ({ isSuccess, data }) => {
-      if (isSuccess) {				
+			if (isSuccess) {
 				const JWT = data.data.jwt;
-				localStorage.setItem("protect_JWT", JWT);				
+				localStorage.setItem('protect_JWT', JWT);
 				//localStorage.setItem("protect_userName", name);
 				setUserName(name);
 				history.push('/advertisement');
 			} else {
 				alert('Error');
 			}
-    });		
+		});
 	};
-	
-  return (
-    <section className="authentication">
-      <img className="authentication__logo" src={LOGO_ICON.url} alt={LOGO_ICON.alt} />
-			
+
+	return (
+		<section className="authentication">
+			<img
+				className="authentication__logo"
+				src={LOGO_ICON.url}
+				alt={LOGO_ICON.alt}
+			/>
+
 			<div className="authentication__form form">
 				<div className="form__figure">
 					<img src="images/figure.png" alt="Figure" />
 				</div>
-			
+
 				<div className="form__row">
 					<Mail />
-					<FormControl
-						placeholder="username"
-						required
-						ref={refName}
-					/>
+					<FormControl placeholder="username" required ref={refName} />
 				</div>
-				
+
 				<div className="form__row">
 					<LockClosed />
 					<FormControl
@@ -81,7 +77,7 @@ const SignUp = () => {
 						ref={refPassword}
 					/>
 				</div>
-				
+
 				<div className="form__row">
 					<LockOpened />
 					<FormControl
@@ -90,13 +86,15 @@ const SignUp = () => {
 						ref={refPasswordConfirm}
 					/>
 				</div>
-				
-				<div className="form__button">		
-					<Button variant="secondary" onClick={clickHandler}>Sign Up</Button>
+
+				<div className="form__button">
+					<Button variant="secondary" onClick={clickHandler}>
+						Sign Up
+					</Button>
 				</div>
 			</div>
-    </section>
-  );
-}
+		</section>
+	);
+};
 
 export default SignUp;
