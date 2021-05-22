@@ -49,16 +49,14 @@ const Profile = () => {
 		serverPutAccount(info);
 		if (!isSaveClicked) {
 			return;
-		}
-		console.log('info1=', info);
+		}		
 	};
 
 	// Get info from MyRoom component
 	const myRoomDataHandler = (info) => {
 		if (!isSaveClicked) {
 			return;
-		}
-		console.log('info2=', info);
+		}		
 	};
 
 	return (

@@ -6,8 +6,7 @@ import Picture from '../../_commonComponents/Picture/Picture';
 
 const MyRoom = (
 	{ isChanging, sendInfo, advertisement } = { advertisement: {} }
-) => {
-	console.log(advertisement);
+) => {	
 	const refLocation = useRef(null);
 	const refPrice = useRef(null);
 	const refSleepingPlaces = useRef(null);
