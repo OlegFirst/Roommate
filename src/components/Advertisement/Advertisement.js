@@ -2,11 +2,7 @@ import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
-import {
-	setAccountId,
-	getToken,
-	setAdvertisementMore
-} from '../../func/local-storage';
+import { setAccountId, getToken } from '../../func/local-storage';
 
 import { ADVERTISEMENT } from '../../constants/main.js';
 import { serverGetAccountId } from '../../func/signUp';
@@ -19,10 +15,10 @@ import Picture from '../_commonComponents/Picture/Picture';
 const Advertisement = () => {
 	const [apartment, setApartment] = useState([]);
 	const history = useHistory();
-	
+
 	const token = getToken();
 
-	useEffect(() => {		
+	useEffect(() => {
 		// Get account id and all posts
 		serverGetAccountId(token, ({ isSuccess, data }) => {
 			if (isSuccess) {
@@ -40,49 +36,35 @@ const Advertisement = () => {
 		});
 	}, []);
 
-	const clickMoreHandler = data => {
-		setAdvertisementMore(data);		
-		history.push('/advertisement-more');
+	const clickMoreHandler = (data) =>
+		history.push({
+			pathname: '/advertisement-more',
+			state: data,
+		});
+
+	const filterHandler = (info) => {
+		console.log(info);
 	};
-	
-	const filterHandler = ({ isSuccess, data }) => {
-		// if (!isSuccess) {
-			// alert("Error");
-			// return;			
-		// }
-		
-		console.log(isSuccess, data)
-		
-		// if (!result.isSuccess) {
-			// alert("Error");
-		// } else {
-			// console.log(result);
-		// }
-	};
-	
+
 	// TO DO : Photos!
-	
+
 	const apartmentList = apartment.map((item, index) => {
-		const {
-			location,
-			description,
-			sleepingPlaces
-		} = item;
+		const { location, description, sleepingPlaces } = item;
 		return (
 			<li className="apartments__apartment apartment" key={index}>
 				<div className="apartment__picture">
-				{false && <Picture url={item.photoes[0]} />}
+					{false && <Picture url={item.photoes[0]} />}
 				</div>
 				<div className="apartment__text">
-					<p>
-						{location}
-					</p>
+					<p>{location}</p>
 					Number of rooms:{sleepingPlaces}. {description}
 					<div>
 						<Button
 							className="button-line"
 							variant="outline-secondary"
-							onClick={() => clickMoreHandler({	location, description, sleepingPlaces })}
+							onClick={() =>
+								clickMoreHandler({ location, description, sleepingPlaces })
+							}
 						>
 							More
 						</Button>

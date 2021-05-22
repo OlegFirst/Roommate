@@ -1,27 +1,11 @@
-import { useEfect } from 'react';
-import { useHistory } from 'react-router-dom';
-
 import Header from '../../_commonComponents/Header/Header';
 import { USER, MY_ROOM } from '../../../constants/main.js';
 import Picture from '../../_commonComponents/Picture/Picture';
 
-import {
-	getUserName,
-	setAccountId,
-	getToken,
-	getAdvertisementMore
-} from '../../../func/local-storage';
+const AdvertisementMore = props => {
+	const advertisementDetails = props.location.state || {};
 
-const AdvertisementMore = () => {
-	const history = useHistory();
-	
-	const userName = getUserName();
-	const data = getAdvertisementMore();	
-	const {
-		location,
-		description,
-		sleepingPlaces
-	} = data;
+	const { location, description, sleepingPlaces } = advertisementDetails;
 
 	const mainPicturesList = MY_ROOM.photoes.map((item, index) => {
 		if (index === 0) {
@@ -48,20 +32,24 @@ const AdvertisementMore = () => {
 							</div>
 
 							<ul className="caption__text">
-								<li className="caption__text-item">
-									Location: {location}
-								</li>
+								<li className="caption__text-item">Location: {location}</li>
 
-								{false && <li className="caption__text-item">Price: {MY_ROOM.price}</li>}
+								{false && (
+									<li className="caption__text-item">Price: {MY_ROOM.price}</li>
+								)}
 
-								{false && <li className="caption__text-item">
-									Living space: {MY_ROOM.livingSpace} sq. m.
-								</li>}
+								{false && (
+									<li className="caption__text-item">
+										Living space: {MY_ROOM.livingSpace} sq. m.
+									</li>
+								)}
 
-								{false && <li className="caption__text-item">
-									Bathrooms: {MY_ROOM.bathRooms}
-								</li>}
-								
+								{false && (
+									<li className="caption__text-item">
+										Bathrooms: {MY_ROOM.bathRooms}
+									</li>
+								)}
+
 								<li className="caption__text-item">
 									Sleeping places: {sleepingPlaces}
 								</li>
@@ -84,7 +72,7 @@ const AdvertisementMore = () => {
 								alt="Figure"
 							/>
 							<div className="header__text">
-								<p className="text__item">{userName} Style</p>
+								<p className="text__item">userName Style</p>
 								<p className="text__item">{location}</p>
 							</div>
 						</header>
