@@ -9,8 +9,7 @@ import CreateAdvertisement from '../components/Advertisement/CreateAdvertisement
 import AdvertisementMore from '../components/Advertisement/AdvertisementMore/AdvertisementMore';
 import Admin from '../components/Admin/Admin';
 import More from '../components/Admin/More/More';
-
-export default () => (
+const AppRouter = () => (
 	<Router>
 		<Switch>
 			<Route exact path="/" component={Home} />
@@ -25,3 +24,4 @@ export default () => (
 		</Switch>
 	</Router>
 );
+export default AppRouter;
