@@ -1,5 +1,4 @@
 import Header from '../../_commonComponents/Header/Header';
-import { USER, MY_ROOM } from '../../../constants/main.js';
 import Picture from '../../_commonComponents/Picture/Picture';
 
 import AdvertisementAuthor from './AdvertisementAuthor';

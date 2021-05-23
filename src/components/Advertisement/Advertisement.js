@@ -27,6 +27,7 @@ const Advertisement = (props) => {
 	};
 	useEffect(() => {
 		fetchMore();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters]);
 
 	const clickMoreHandler = (data) =>
@@ -88,7 +89,7 @@ const Advertisement = (props) => {
 					</ul>
 				)}
 
-				{apartment.length == 0 && (
+				{apartment.length === 0 && (
 					<ul className="advertisement__apartments apartments">EMPTY</ul>
 				)}
 
