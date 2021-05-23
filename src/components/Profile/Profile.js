@@ -10,6 +10,7 @@ import {
 	serverPutAccount,
 	serverGetMyAdverts,
 } from '../../func/account';
+import axios from '../../func/axios';
 const Profile = () => {
 	const [isInformationChanges, setIsInformationChanges] = useState(false);
 	const [isSaveClicked, setIsSaveClicked] = useState(false);
@@ -45,18 +46,21 @@ const Profile = () => {
 
 	// Get info from Information component
 	const informationDataHandler = (info) => {
-		setImmediate(() => setUserData(info));
-		serverPutAccount(info);
 		if (!isSaveClicked) {
 			return;
-		}		
+		}
+		setImmediate(() => setUserData(info));
+		serverPutAccount(info);
 	};
 
 	// Get info from MyRoom component
 	const myRoomDataHandler = (info) => {
 		if (!isSaveClicked) {
 			return;
-		}		
+		}
+		const newData = { ...advertisement, ...info };
+		setImmediate(() => setAdvertisement(newData));
+		axios.post('listing/update', newData);
 	};
 
 	return (
