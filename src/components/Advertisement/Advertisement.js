@@ -32,7 +32,7 @@ const Advertisement = (props) => {
 	const clickMoreHandler = (data) =>
 		history.push({
 			pathname: '/advertisement-more',
-			state: data
+			state: data,
 		});
 
 	const filterHandler = (info) => {
@@ -51,7 +51,7 @@ const Advertisement = (props) => {
 		return (
 			<li className="apartments__apartment apartment" key={index}>
 				<div className="apartment__picture">
-					{false && <Picture url={item.photoes[0]} />}
+					{item.photos?.[0] && <Picture url={item.photos[0]} />}
 				</div>
 				<div className="apartment__text">
 					<p>{location}</p>
@@ -79,7 +79,12 @@ const Advertisement = (props) => {
 				{apartment.length > 0 && (
 					<ul className="advertisement__apartments apartments">
 						{apartmentList}
-						<Button onClick={() => fetchMore(apartment.length)} variant="outline-secondary">Get more</Button>
+						<Button
+							onClick={() => fetchMore(apartment.length)}
+							variant="outline-secondary"
+						>
+							Get more
+						</Button>
 					</ul>
 				)}
 
