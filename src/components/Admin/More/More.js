@@ -1,14 +1,13 @@
+import { useHistory } from 'react-router-dom';
 import Header from '../../_commonComponents/HeaderAdmin/HeaderAdmin';
 import Picture from '../../_commonComponents/Picture/Picture';
 
 import AdvertisementAuthor from '../../Advertisement/AdvertisementMore/AdvertisementAuthor';
 const AdvertisementMore = (props) => {
 	const advertisementDetails = props.location.state || {};
-	
-	const { location, description, sleepingPlaces, accountId } = advertisementDetails;
-	
-	console.log('advertisementDetails', advertisementDetails)
-	
+	const { location, description, sleepingPlaces, price, accountId } = advertisementDetails.data;
+	const history = useHistory();
+		
 	const mainPicturesList = [];
 	const MY_ROOM = '';
 	
@@ -23,10 +22,16 @@ const AdvertisementMore = (props) => {
 			// </li>
 		// );
 	// });
+	
+	const mainClickedHandler = () => {
+		history.push('/admin');
+	};
 
 	return (
 		<section className="advertisement-more">		
-			<Header />
+			<Header
+				mainClicked={mainClickedHandler}
+			/>
 
 			<div className="advertisement-more__main-wrapper">
 				<main className="advertisement-more__main main">
@@ -39,9 +44,7 @@ const AdvertisementMore = (props) => {
 							<ul className="caption__text">
 								<li className="caption__text-item">Location: {location}</li>
 
-								{false && (
-									<li className="caption__text-item">Price: {MY_ROOM.price}</li>
-								)}
+								<li className="caption__text-item">Price: {price}</li>
 
 								{false && (
 									<li className="caption__text-item">

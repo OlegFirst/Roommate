@@ -11,15 +11,6 @@ const Home = () => {
 	return (
 		<section className="home">
 			<header className="home__header header">
-				<div className="header__buttons">
-					<Button variant="secondary" onClick={() => history.push('/sign-up')}>
-						Sign Up
-					</Button>
-					<Button variant="secondary" onClick={() => history.push('/sign-in')}>
-						Sign In
-					</Button>
-				</div>
-
 				<div className="header__info">
 					<img
 						className="header__logo"
@@ -29,6 +20,15 @@ const Home = () => {
 					<p className="header__text">
 						The best solution for students, who want to find a place for living
 					</p>
+				</div>
+				
+				<div className="header__buttons">
+					<Button variant="secondary" onClick={() => history.push('/sign-up')}>
+						Sign Up
+					</Button>
+					<Button variant="secondary" onClick={() => history.push('/sign-in')}>
+						Sign In
+					</Button>
 				</div>
 			</header>
 

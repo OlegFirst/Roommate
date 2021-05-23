@@ -9,7 +9,8 @@ import Picture from '../_commonComponents/Picture/Picture';
 
 import {
 	serverGetList,
-	serverDeleteApartment
+	serverDeleteApartment,
+	serverDeleteAcaunt
 } from '../../func/admin';
 
 const Admin = () => {

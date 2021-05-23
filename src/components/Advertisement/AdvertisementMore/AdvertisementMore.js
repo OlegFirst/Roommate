@@ -6,7 +6,7 @@ import AdvertisementAuthor from './AdvertisementAuthor';
 const AdvertisementMore = (props) => {
 	const advertisementDetails = props.location.state || {};
 	
-	const { location, description, sleepingPlaces, accountId } = advertisementDetails;
+	const { location, description, sleepingPlaces, price, accountId } = advertisementDetails;
 	
 	const mainPicturesList = MY_ROOM.photoes.map((item, index) => {
 		if (index === 0) {
@@ -35,9 +35,7 @@ const AdvertisementMore = (props) => {
 							<ul className="caption__text">
 								<li className="caption__text-item">Location: {location}</li>
 
-								{false && (
-									<li className="caption__text-item">Price: {MY_ROOM.price}</li>
-								)}
+								<li className="caption__text-item">Price: {price}</li>
 
 								{false && (
 									<li className="caption__text-item">
