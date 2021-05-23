@@ -51,6 +51,7 @@ const CreateAdvertisement = () => {
 	const imageLoaderClose = (info) => {
 		setImageLoaderShow(false);
 	};
+
 	const handleUpload = (formData) => {
 		axios
 			.post('listing/uploadTempImage', formData)
@@ -62,7 +63,6 @@ const CreateAdvertisement = () => {
 			.catch(console.log)
 			.then(imageLoaderClose);
 	};
-
 	return (
 		<section className="create-advertisement">
 			<Header />

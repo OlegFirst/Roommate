@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
 
 import Picture from '../../_commonComponents/Picture/Picture';
+import ImageLoader from '../../_commonComponents/ImageLoader/ImageLoader';
 
 const MyRoom = (
 	{ isChanging, sendInfo, advertisement } = { advertisement: {} }
@@ -12,6 +12,10 @@ const MyRoom = (
 	const refSleepingPlaces = useRef(null);
 	const refDescription = useRef(null);
 	const [photos, setPhotos] = useState(advertisement?.photos || []);
+
+	// const refImageLoader = useRef(null);
+	const [imageLoaderShow, setImageLoaderShow] = useState(false);
+
 	if (!isChanging && refLocation.current) {
 		const res = {
 			...advertisement,
@@ -26,6 +30,15 @@ const MyRoom = (
 	const removePhoto = (url) => {
 		setPhotos(photos.filter((u) => u !== url));
 	};
+
+	const imageLoaderClose = (info) => {
+		if (!info) {
+			return;
+		}
+		console.log(info);
+		setImageLoaderShow(false);
+	};
+	// Changing_(end)
 
 	return (
 		<div className="my-room">
@@ -121,7 +134,11 @@ const MyRoom = (
 					<div className="main-changing__pictures pictures">
 						<div className="pictures__header">
 							<h3 className="my-room__title">Photo</h3>
-							<Button className="button-outline" variant="outline-secondary">
+							<Button
+								className="button-outline"
+								variant="outline-secondary"
+								onClick={() => setImageLoaderShow(true)}
+							>
 								Add+
 							</Button>
 						</div>
@@ -139,6 +156,8 @@ const MyRoom = (
 					</div>
 				</main>
 			)}
+
+			<ImageLoader isShow={imageLoaderShow} handleClose={imageLoaderClose} />
 		</div>
 	);
 };
