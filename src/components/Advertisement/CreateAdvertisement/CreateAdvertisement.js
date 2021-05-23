@@ -17,6 +17,7 @@ const CreateAdvertisement = () => {
 	
 	const refImageLoader = useRef(null);
 	const [imageLoaderShow, setImageLoaderShow] = useState(false);
+	const [picture, setPicture] = useState('');
 	
 	const createAdvetritesementHandler = async () => {
 		const data = {
@@ -40,7 +41,10 @@ const CreateAdvertisement = () => {
 		}
 	};
 
-	const imageLoaderClose = () => {
+	const imageLoaderClose = info => {
+		console.log("2", info)
+		setPicture(info);
+		
 		setImageLoaderShow(false);
 	};
 
@@ -81,6 +85,8 @@ const CreateAdvertisement = () => {
 					<FormControl as="textarea" ref={refDescription} />
 				</li>
 			</ul>
+			
+			<img src={picture} />
 
 			<div className="create-advertisement__pictures pictures">
 				<div className="pictures__header">
@@ -105,7 +111,10 @@ const CreateAdvertisement = () => {
 				</div>
 			</div>
 
-			<ImageLoader isShow={imageLoaderShow} handleClose={imageLoaderClose} />
+			<ImageLoader 
+				isShow={imageLoaderShow}
+				handleClose={imageLoaderClose} 
+			/>
 		</section>
 	);
 };
