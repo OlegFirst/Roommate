@@ -3,7 +3,7 @@ import { Button, FormControl } from 'react-bootstrap';
 
 import Picture from '../../_commonComponents/Picture/Picture';
 import ImageLoader from '../../_commonComponents/ImageLoader/ImageLoader';
-
+import axios from '../../../func/axios';
 const MyRoom = (
 	{ isChanging, sendInfo, advertisement } = { advertisement: {} }
 ) => {
@@ -32,14 +32,20 @@ const MyRoom = (
 	};
 
 	const imageLoaderClose = (info) => {
-		if (!info) {
-			return;
-		}
-		console.log(info);
 		setImageLoaderShow(false);
 	};
 	// Changing_(end)
-
+	const handleUpload = (formData) => {
+		axios
+			.post('listing/uploadTempImage', formData)
+			.then(({ data }) => {
+				if (data?.data?.length) {
+					setPhotos([...photos, ...data.data]);
+				}
+			})
+			.catch(console.log)
+			.then(imageLoaderClose);
+	};
 	return (
 		<div className="my-room">
 			<h3 className="my-room__title">My room</h3>
@@ -157,7 +163,11 @@ const MyRoom = (
 				</main>
 			)}
 
-			<ImageLoader isShow={imageLoaderShow} handleClose={imageLoaderClose} />
+			<ImageLoader
+				isShow={imageLoaderShow}
+				handleClose={imageLoaderClose}
+				handleFormData={handleUpload}
+			/>
 		</div>
 	);
 };
