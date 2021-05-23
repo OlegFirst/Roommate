@@ -45,12 +45,11 @@ const CreateAdvertisement = () => {
 	const imageLoaderClose = (info) => {
 		setImageLoaderShow(false);
 	};
-	const handleUpload = (formdata) => {
+	const handleUpload = (formData) => {
 		axios
-			.post('listing/uploadTempImage', formdata)
+			.post('listing/uploadTempImage', formData)
 			.then(({ data }) => {
 				if (data?.data?.length) {
-					console.log(11);
 					setImages([...images, ...data.data]);
 				}
 			})
