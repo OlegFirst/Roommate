@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
 
 import Header from '../_commonComponents/Header/Header';
@@ -10,10 +10,10 @@ import {
 	serverPutAccount,
 	serverGetMyAdverts,
 } from '../../func/account';
+
 const Profile = () => {
 	const [isInformationChanges, setIsInformationChanges] = useState(false);
 	const [isSaveClicked, setIsSaveClicked] = useState(false);
-
 	const [userData, setUserData] = useState({});
 
 	const [advertisement, setAdvertisement] = useState({});

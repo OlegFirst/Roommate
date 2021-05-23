@@ -1,8 +1,9 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
 
 import { MY_ROOM } from '../../../constants/main.js';
 import Picture from '../../_commonComponents/Picture/Picture';
+import ImageLoader from '../../_commonComponents/ImageLoader/ImageLoader';
 
 const MyRoom = (
 	{ isChanging, sendInfo, advertisement } = { advertisement: {} }
@@ -11,6 +12,10 @@ const MyRoom = (
 	const refPrice = useRef(null);
 	const refSleepingPlaces = useRef(null);
 	const refDescription = useRef(null);
+	
+	const refImageLoader = useRef(null);
+	const [imageLoaderShow, setImageLoaderShow] = useState(false);
+	const [pictures, setPictures] = useState([]);
 
 	if (!isChanging && refLocation.current) {
 		const res = {
@@ -33,17 +38,35 @@ const MyRoom = (
 			</li>
 		);
 	});
-
-	const mainChanginPicturesList = MY_ROOM.photoes.map((item, index) => {
+	
+	// Changing_(start)
+	const mainChanginDelete = index => {
+		let arg = [...pictures];
+		arg.splice(index, 1);
+		setPictures(arg);
+	};
+	
+	const mainChanginPicturesList = pictures.map((item, index) => {
 		return (
 			<li className="items__item item" key={index}>
 				<div className="item__inner">
 					<Picture url={item} />
-					<span>X</span>
+					<span onClick={() => mainChanginDelete(index)}>X</span>
 				</div>
 			</li>
 		);
 	});
+	
+	const imageLoaderClose = info => {
+		if (!info) {
+			return;
+		}
+		let arg = [...pictures];
+		arg.push(info);
+		setPictures(arg);		
+		setImageLoaderShow(false);
+	};
+	// Changing_(end)
 
 	return (
 		<div className="my-room">
@@ -131,7 +154,7 @@ const MyRoom = (
 					<div className="main-changing__pictures pictures">
 						<div className="pictures__header">
 							<h3 className="my-room__title">Photo</h3>
-							<Button className="button-outline" variant="outline-secondary">
+							<Button className="button-outline" variant="outline-secondary" onClick={() => setImageLoaderShow(true)}>
 								Add+
 							</Button>
 						</div>
@@ -140,6 +163,11 @@ const MyRoom = (
 					</div>
 				</main>
 			)}
+			
+			<ImageLoader 
+				isShow={imageLoaderShow}
+				handleClose={imageLoaderClose} 
+			/>
 		</div>
 	);
 };

@@ -18,7 +18,6 @@ const Information = ({ isChanging, sendInfo, userData } = { userData: {} }) => {
 
 		sendInfo(res);
 	}
-
 	return (
 		<div className="information">
 			<img
@@ -71,7 +70,7 @@ const Information = ({ isChanging, sendInfo, userData } = { userData: {} }) => {
 					</ul>
 				</div>
 			)}
-		</div>
+			</div>
 	);
 };
 

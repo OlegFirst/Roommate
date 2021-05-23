@@ -50,8 +50,6 @@ const CreateAdvertisement = () => {
 		setImageLoaderShow(false);
 	};
 	
-	console.log("ok", pictures)	
-	
 	const picturesList = pictures.map((item, index) => {
 		return (
 			<li 
