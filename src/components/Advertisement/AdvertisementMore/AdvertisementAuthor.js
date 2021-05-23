@@ -11,7 +11,7 @@ const AdvertisementAuthor = (props) => {
 				})
 				.catch(console.log);
 		}
-	}, []);
+	}, [props.accountId]);
 	return (
 		<div className="right__text text">
 			<header className="right__header header">
