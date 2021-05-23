@@ -12,7 +12,7 @@ import { serverSingIn } from '../../func/signIn';
 const Authentication = ({ role = 'sign-in' }) => {
 	const refName = useRef(null);
 	const refPassword = useRef(null);
-	const refPasswordConfirm = useRef(null);
+	// const refPasswordConfirm = useRef(null);
 
 	const history = useHistory();
 
@@ -35,7 +35,7 @@ const Authentication = ({ role = 'sign-in' }) => {
 				const JWT = data.data.jwt;
 				setToken(JWT);
 				setUserName(name);
-				
+
 				if (name === 'admin' && password === 'admin') {
 					history.push('/admin');
 				} else {

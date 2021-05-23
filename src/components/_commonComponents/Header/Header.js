@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { Button, Dropdown } from 'react-bootstrap';
 
-import { LOGO_ICON, USER } from '../../../constants/main.js';
+import { LOGO_ICON } from '../../../constants/main.js';
 
 const Header = () => {
 	const history = useHistory();

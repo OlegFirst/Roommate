@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 import { LOGO_ICON, HOME_PICTURES } from '../../constants/main.js';
@@ -21,7 +21,7 @@ const Home = () => {
 						The best solution for students, who want to find a place for living
 					</p>
 				</div>
-				
+
 				<div className="header__buttons">
 					<Button variant="secondary" onClick={() => history.push('/sign-up')}>
 						Sign Up

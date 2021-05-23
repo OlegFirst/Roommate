@@ -1,6 +1,6 @@
 import { Button, Dropdown } from 'react-bootstrap';
 
-import { LOGO_ICON, USER } from '../../../constants/main.js';
+import { LOGO_ICON } from '../../../constants/main.js';
 
 const HeaderAdmin = ({ mainClicked }) => {
 	return (
@@ -12,7 +12,11 @@ const HeaderAdmin = ({ mainClicked }) => {
 			/>
 
 			<div className="header-admin__buttons">
-				<Button className="button-outline" variant="outline-secondary" onClick={mainClicked}>
+				<Button
+					className="button-outline"
+					variant="outline-secondary"
+					onClick={mainClicked}
+				>
 					Main
 				</Button>
 
