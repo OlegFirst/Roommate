@@ -1,49 +1,31 @@
+import { useState } from 'react';
 import { useRef } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
 
-import { MY_ROOM } from '../../../constants/main.js';
 import Picture from '../../_commonComponents/Picture/Picture';
 
 const MyRoom = (
 	{ isChanging, sendInfo, advertisement } = { advertisement: {} }
-) => {	
+) => {
 	const refLocation = useRef(null);
 	const refPrice = useRef(null);
 	const refSleepingPlaces = useRef(null);
 	const refDescription = useRef(null);
-
+	const [photos, setPhotos] = useState(advertisement?.photos || []);
 	if (!isChanging && refLocation.current) {
 		const res = {
+			...advertisement,
 			location: refLocation.current.value,
 			price: refPrice.current.value,
 			sleepingPlaces: refSleepingPlaces.current.value,
 			description: refDescription.current.value,
+			photos,
 		};
 		sendInfo(res);
 	}
-
-	const mainPicturesList = MY_ROOM.photoes.map((item, index) => {
-		if (index === 0) {
-			return false;
-		}
-
-		return (
-			<li className="main__pictures-item" key={index}>
-				<Picture url={item} />
-			</li>
-		);
-	});
-
-	const mainChanginPicturesList = MY_ROOM.photoes.map((item, index) => {
-		return (
-			<li className="items__item item" key={index}>
-				<div className="item__inner">
-					<Picture url={item} />
-					<span>X</span>
-				</div>
-			</li>
-		);
-	});
+	const removePhoto = (url) => {
+		setPhotos(photos.filter((u) => u !== url));
+	};
 
 	return (
 		<div className="my-room">
@@ -53,9 +35,11 @@ const MyRoom = (
 				<main className="my-room__main main">
 					<div className="main__caption caption">
 						<div className="caption__header">
-							<div className="caption__picture">
-								<Picture url={MY_ROOM.photoes[0]} />
-							</div>
+							{photos[0] && (
+								<div className="caption__picture">
+									<Picture url={photos[0]} />
+								</div>
+							)}
 
 							<ul className="caption__text">
 								<li className="caption__text-item">
@@ -85,7 +69,13 @@ const MyRoom = (
 						</div>
 					</div>
 
-					<ul className="main__pictures">{mainPicturesList}</ul>
+					<ul className="main__pictures">
+						{photos.slice(1).map((photoUrl) => (
+							<li className="main__pictures-item" key={photoUrl}>
+								<Picture url={photoUrl} />
+							</li>
+						))}
+					</ul>
 				</main>
 			)}
 
@@ -136,7 +126,16 @@ const MyRoom = (
 							</Button>
 						</div>
 
-						<ul className="pictures__items">{mainChanginPicturesList}</ul>
+						<ul className="pictures__items">
+							{photos.map((photoUrl) => (
+								<li className="items__item item" key={photoUrl}>
+									<div className="item__inner">
+										<Picture url={photoUrl} />
+										<span onClick={() => removePhoto(photoUrl)}>X</span>
+									</div>
+								</li>
+							))}
+						</ul>
 					</div>
 				</main>
 			)}
