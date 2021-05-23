@@ -16,7 +16,7 @@ const AdvertisementMore = (props) => {
 		livingSpace,
 	} = advertisementDetails;
 
-	const mainPicturesList = photos.slice(1).map((item, index) => {
+	const mainPicturesList = photos?.slice(1).map((item, index) => {
 		return (
 			<li className="main__pictures-item" key={index}>
 				<Picture url={item} />
@@ -33,7 +33,7 @@ const AdvertisementMore = (props) => {
 					<div className="main__caption caption">
 						<div className="caption__header">
 							<div className="caption__picture">
-								{photos[0] && <Picture url={photos[0]} />}
+								{photos?.[0] && <Picture url={photos[0]} />}
 							</div>
 
 							<ul className="caption__text">
