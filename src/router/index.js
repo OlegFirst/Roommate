@@ -8,6 +8,7 @@ import Advertisement from '../components/Advertisement/Advertisement';
 import CreateAdvertisement from '../components/Advertisement/CreateAdvertisement/CreateAdvertisement';
 import AdvertisementMore from '../components/Advertisement/AdvertisementMore/AdvertisementMore';
 import Admin from '../components/Admin/Admin';
+import More from '../components/Admin/More/More';
 
 export default () => (
 	<Router>
@@ -17,13 +18,10 @@ export default () => (
 			<Route exact path="/sign-in" component={SignIn} />
 			<Route exact path="/profile" component={Profile} />
 			<Route exact path="/advertisement" component={Advertisement} />
-			<Route
-				exact
-				path="/create-advertisement"
-				component={CreateAdvertisement}
-			/>
+			<Route exact path="/create-advertisement" component={CreateAdvertisement} />
 			<Route exact path="/advertisement-more" component={AdvertisementMore} />
 			<Route exact path="/admin" component={Admin} />
+			<Route exact path="/admin-more" component={More} />
 		</Switch>
 	</Router>
 );

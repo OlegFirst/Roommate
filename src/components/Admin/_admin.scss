@@ -1,4 +1,11 @@
+@import './More/_more.scss';
+
 .admin {
+	&__empty-text {
+		margin-top: 40px;
+		text-align: center;
+	}
+
 	&__apartments {
 		margin-top: 40px;
 

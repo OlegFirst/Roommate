@@ -1,27 +1,49 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 import { ADVERTISEMENT } from '../../constants/main.js';
 import Header from '../_commonComponents/HeaderAdmin/HeaderAdmin';
+import More from './More/More';
 import Picture from '../_commonComponents/Picture/Picture';
 
 import {
-	serverGetList
+	serverGetList,
+	serverDeleteApartment
 } from '../../func/admin';
 
 const Admin = () => {
 	const [advertisementList, setAdvertisementList] = useState([]);
 	const history = useHistory();
 	
-	const mainClickedHandler = async() => {
-		const result = await serverGetList();
-		console.log(result);
+	// Show all apartments list from server
+	const showAllApartmentList = async() => {
+	const result = await serverGetList();		
 		if (!result.isSuccess) {
 			alert('Error');
 			return;
 		}
 		setAdvertisementList(result.data);
+	}
+	
+	useEffect(() => {
+		showAllApartmentList();
+	}, []);
+	
+	// Show all apartments list
+	const mainClickedHandler = async() => {		
+		showAllApartmentList();
+	};
+	
+	// Delete selected apartment
+	const deleteClickHandler = async(listingId) => {		
+		const result = await serverDeleteApartment(listingId);
+		if (!result.isSuccess) {
+			alert("Error")
+			return;
+		}		
+		// Component updates
+		showAllApartmentList();
 	};
 	
 	const apartmentList = advertisementList.map((item, index) => {
@@ -29,7 +51,7 @@ const Admin = () => {
 			listingId,
 			location,
 			description
-		} = item;	
+		} = item;
 		return (
 			<li className="apartments__apartment apartment" key={index}>
 				<div className="apartment__picture">
@@ -42,7 +64,7 @@ const Admin = () => {
 						{description}
 					<div>
 						<Button className="button-line" variant="outline-secondary"
-							onClick={() => history.push({ pathname: '/advertisement-more', state: { isAdmin: true, data: item } })}
+							onClick={() => history.push({ pathname: '/admin-more', state: { data: item } })}
 						>
 							More
 						</Button>
@@ -50,7 +72,7 @@ const Admin = () => {
 				</div>
 
 				<div className="apartment__buttons">
-					<Button className="button-brown" variant="outline-secondary">
+					<Button className="button-brown" variant="outline-secondary" onClick={() => deleteClickHandler(listingId)} >
 						Delete
 					</Button>
 					<Button className="button-brown" variant="outline-secondary">
@@ -67,7 +89,17 @@ const Admin = () => {
 				mainClicked={mainClickedHandler}
 			/>
 
-			<ul className="admin__apartments apartments">{apartmentList}</ul>
+			{
+				apartmentList.length > 0
+				&&
+				<ul className="admin__apartments apartments">{apartmentList}</ul>				
+			}
+			
+			{
+				apartmentList.length === 0
+				&&
+				<h2 className="admin__empty-text">Empty</h2>
+			}
 		</section>
 	);
 };

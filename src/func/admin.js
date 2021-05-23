@@ -11,3 +11,15 @@ export const serverGetList = () =>
 			isSuccess: false,
 			data: null,
 		}));
+		
+export const serverDeleteApartment = listingId =>
+	axios
+		.post('listing/delete', {listingId})
+		.then((res) => ({
+			isSuccess: true,
+			data: res.data.data,
+		}))
+		.catch((err) => ({
+			isSuccess: false,
+			data: null,
+		}));

@@ -79,7 +79,7 @@ const Advertisement = (props) => {
 				{apartment.length > 0 && (
 					<ul className="advertisement__apartments apartments">
 						{apartmentList}
-						<Button onClick={() => fetchMore(apartment.length)}> more</Button>
+						<Button onClick={() => fetchMore(apartment.length)} variant="outline-secondary">Get more</Button>
 					</ul>
 				)}
 
