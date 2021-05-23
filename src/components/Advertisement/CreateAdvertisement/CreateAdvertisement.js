@@ -1,66 +1,68 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Button, FormControl } from 'react-bootstrap';
 
 import Header from '../../_commonComponents/Header/Header';
 import ImageLoader from '../../_commonComponents/ImageLoader/ImageLoader';
 
-import { createAdvetritesement } from '../../../func/createAdvetritesement';
+import axios from '../../../func/axios';
 
 const CreateAdvertisement = () => {
+	const history = useHistory();
 	const refLocation = useRef(null);
 	const refStreet = useRef(null);
 	const refNumberOfRooms = useRef(null);
 	const refNumberPeople = useRef(null);
 	const refPrice = useRef(null);
 	const refDescription = useRef(null);
-	
-	const refImageLoader = useRef(null);
+
 	const [imageLoaderShow, setImageLoaderShow] = useState(false);
-	const [pictures, setPictures] = useState([]);
-	
-	const createAdvetritesementHandler = async () => {
+	const [images, setImages] = useState([]);
+
+	const createAdvetritesementHandler = () => {
 		const data = {
 			location: refLocation.current.value + ' ' + refStreet.current.value,
 			price: refPrice.current.value,
 			sleepingPlaces: refNumberOfRooms.current.value,
-			description: refDescription.current.value
+			description: refDescription.current.value,
+			bedrooms: refNumberOfRooms.current.value,
+			photos: images,
 		};
-		
-		const result = await createAdvetritesement(data);
-		if (!result.isSuccess) {
-			alert("Error");
-		} else {
-			alert("Created");
-			refLocation.current.value = '';
-			refStreet.current.value = '';
-			refPrice.current.value = '';
-			refNumberPeople.current.value = '';
-			refNumberOfRooms.current.value = '';
-			refDescription.current.value = '';
-		}
+
+		axios
+			.post('listing/create', data)
+			.then(({ data }) => !!data?.data)
+			.catch(() => false)
+			.then((result) => {
+				if (!result) {
+					alert('Error');
+				} else {
+					refLocation.current.value = '';
+					refStreet.current.value = '';
+					refPrice.current.value = '';
+					refNumberPeople.current.value = '';
+					refNumberOfRooms.current.value = '';
+					refDescription.current.value = '';
+					history.push('/profile');
+				}
+			});
 	};
 
-	const imageLoaderClose = info => {
-		if (!info) {
-			return;
-		}
-		let arg = [...pictures];
-		arg.push(info);
-		setPictures(arg);		
+	const imageLoaderClose = (info) => {
 		setImageLoaderShow(false);
 	};
-	
-	const picturesList = pictures.map((item, index) => {
-		return (
-			<li 
-				className="pictures__item"
-				key={index}
-			>
-				<img src={item} alt="Apartment" />
-			</li>
-		);
-	})
 
+	const handleUpload = (formData) => {
+		axios
+			.post('listing/uploadTempImage', formData)
+			.then(({ data }) => {
+				if (data?.data?.length) {
+					setImages([...images, ...data.data]);
+				}
+			})
+			.catch(console.log)
+			.then(imageLoaderClose);
+	};
 	return (
 		<section className="create-advertisement">
 			<Header />
@@ -102,6 +104,29 @@ const CreateAdvertisement = () => {
 			<div className="create-advertisement__pictures pictures">
 				<div className="pictures__header">
 					<span>Photoes:</span>
+					<div
+						style={{
+							display: 'grid',
+							gap: '1rem',
+							gridTemplateColumns:
+								'repeat(auto-fill, minmax(min(10rem, 100%), 1fr))',
+						}}
+					>
+						{images.map((imageUrl) => {
+							return (
+								<img
+									alt=""
+									key={imageUrl}
+									style={{
+										width: '100%',
+										height: 'auto',
+										border: '2px solid black',
+									}}
+									src={imageUrl}
+								/>
+							);
+						})}
+					</div>
 					<Button
 						className="button-outline"
 						variant="outline-secondary"
@@ -110,10 +135,6 @@ const CreateAdvertisement = () => {
 						Add+
 					</Button>
 				</div>
-				
-				<ul className="pictures__items">
-					{picturesList}
-				</ul>
 
 				<div className="pictures__footer">
 					<Button
@@ -126,9 +147,10 @@ const CreateAdvertisement = () => {
 				</div>
 			</div>
 
-			<ImageLoader 
+			<ImageLoader
 				isShow={imageLoaderShow}
-				handleClose={imageLoaderClose} 
+				handleClose={imageLoaderClose}
+				handleFormData={handleUpload}
 			/>
 		</section>
 	);
