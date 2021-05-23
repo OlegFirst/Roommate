@@ -5,6 +5,7 @@ import Header from '../../_commonComponents/Header/Header';
 import ImageLoader from '../../_commonComponents/ImageLoader/ImageLoader';
 
 import { createAdvetritesement } from '../../../func/createAdvetritesement';
+import axios from '../../../func/axios';
 
 const CreateAdvertisement = () => {
 	const refLocation = useRef(null);
@@ -13,24 +14,25 @@ const CreateAdvertisement = () => {
 	const refNumberPeople = useRef(null);
 	const refPrice = useRef(null);
 	const refDescription = useRef(null);
-	
+	// TO DO: Photos
+
 	const refImageLoader = useRef(null);
 	const [imageLoaderShow, setImageLoaderShow] = useState(false);
-	const [pictures, setPictures] = useState([]);
-	
+	const [images, setImages] = useState([]);
+
 	const createAdvetritesementHandler = async () => {
 		const data = {
 			location: refLocation.current.value + ' ' + refStreet.current.value,
 			price: refPrice.current.value,
 			sleepingPlaces: refNumberOfRooms.current.value,
-			description: refDescription.current.value
+			description: refDescription.current.value,
 		};
-		
+
 		const result = await createAdvetritesement(data);
 		if (!result.isSuccess) {
-			alert("Error");
+			alert('Error');
 		} else {
-			alert("Created");
+			alert('Created');
 			refLocation.current.value = '';
 			refStreet.current.value = '';
 			refPrice.current.value = '';
@@ -40,28 +42,21 @@ const CreateAdvertisement = () => {
 		}
 	};
 
-	const imageLoaderClose = info => {
-		if (!info) {
-			return;
-		}
-		let arg = [...pictures];
-		arg.push(info);
-		setPictures(arg);		
+	const imageLoaderClose = (info) => {
 		setImageLoaderShow(false);
 	};
-	
-	console.log("ok", pictures)	
-	
-	const picturesList = pictures.map((item, index) => {
-		return (
-			<li 
-				className="pictures__item"
-				key={index}
-			>
-				<img src={item} alt="Apartment" />
-			</li>
-		);
-	})
+	const handleUpload = (formdata) => {
+		axios
+			.post('listing/uploadTempImage', formdata)
+			.then(({ data }) => {
+				if (data?.data?.length) {
+					console.log(11);
+					setImages([...images, ...data.data]);
+				}
+			})
+			.catch(console.log)
+			.then(imageLoaderClose);
+	};
 
 	return (
 		<section className="create-advertisement">
@@ -104,6 +99,29 @@ const CreateAdvertisement = () => {
 			<div className="create-advertisement__pictures pictures">
 				<div className="pictures__header">
 					<span>Photoes:</span>
+					<div
+						style={{
+							display: 'grid',
+							gap: '1rem',
+							gridTemplateColumns:
+								'repeat(auto-fill, minmax(min(10rem, 100%), 1fr))',
+						}}
+					>
+						{images.map((imageUrl) => {
+							return (
+								<img
+									alt=""
+									key={imageUrl}
+									style={{
+										width: '100%',
+										height: 'auto',
+										border: '2px solid black',
+									}}
+									src={imageUrl}
+								/>
+							);
+						})}
+					</div>
 					<Button
 						className="button-outline"
 						variant="outline-secondary"
@@ -112,10 +130,6 @@ const CreateAdvertisement = () => {
 						Add+
 					</Button>
 				</div>
-				
-				<ul className="pictures__items">
-					{picturesList}
-				</ul>
 
 				<div className="pictures__footer">
 					<Button
@@ -128,9 +142,10 @@ const CreateAdvertisement = () => {
 				</div>
 			</div>
 
-			<ImageLoader 
+			<ImageLoader
 				isShow={imageLoaderShow}
-				handleClose={imageLoaderClose} 
+				handleClose={imageLoaderClose}
+				handleFormData={handleUpload}
 			/>
 		</section>
 	);
