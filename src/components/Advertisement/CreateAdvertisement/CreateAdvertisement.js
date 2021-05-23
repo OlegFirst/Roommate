@@ -13,11 +13,10 @@ const CreateAdvertisement = () => {
 	const refNumberPeople = useRef(null);
 	const refPrice = useRef(null);
 	const refDescription = useRef(null);
-	// TO DO: Photos
 	
 	const refImageLoader = useRef(null);
 	const [imageLoaderShow, setImageLoaderShow] = useState(false);
-	const [picture, setPicture] = useState('');
+	const [pictures, setPictures] = useState([]);
 	
 	const createAdvetritesementHandler = async () => {
 		const data = {
@@ -42,11 +41,27 @@ const CreateAdvertisement = () => {
 	};
 
 	const imageLoaderClose = info => {
-		console.log("2", info)
-		setPicture(info);
-		
+		if (!info) {
+			return;
+		}
+		let arg = [...pictures];
+		arg.push(info);
+		setPictures(arg);		
 		setImageLoaderShow(false);
 	};
+	
+	console.log("ok", pictures)	
+	
+	const picturesList = pictures.map((item, index) => {
+		return (
+			<li 
+				className="pictures__item"
+				key={index}
+			>
+				<img src={item} alt="Apartment" />
+			</li>
+		);
+	})
 
 	return (
 		<section className="create-advertisement">
@@ -85,8 +100,6 @@ const CreateAdvertisement = () => {
 					<FormControl as="textarea" ref={refDescription} />
 				</li>
 			</ul>
-			
-			<img src={picture} />
 
 			<div className="create-advertisement__pictures pictures">
 				<div className="pictures__header">
@@ -99,6 +112,10 @@ const CreateAdvertisement = () => {
 						Add+
 					</Button>
 				</div>
+				
+				<ul className="pictures__items">
+					{picturesList}
+				</ul>
 
 				<div className="pictures__footer">
 					<Button

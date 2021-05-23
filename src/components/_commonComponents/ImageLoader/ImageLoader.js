@@ -3,7 +3,6 @@ import { Modal, Button } from 'react-bootstrap';
 
 const ImageLoader = ({ isShow, handleClose }) => {
 	const refInput = useRef(null);
-	//const refImage = useRef(null);
 
 	useEffect(() => {
 		if (!isShow) {
