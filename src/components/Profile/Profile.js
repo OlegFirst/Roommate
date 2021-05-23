@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { Button, Dropdown } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 
 import Header from '../_commonComponents/Header/Header';
 import Information from './Information/Information';
