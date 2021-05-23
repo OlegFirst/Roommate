@@ -24,10 +24,6 @@ const ImageLoader = ({ isShow, handleClose, handleFormData }) => {
 		});
 	}, [isShow]);
 
-	const OKHandle = () => {
-		handleClose(document.querySelector('#myImg').src);
-	};
-
 	const handleUpload = () => {
 		let formData = new FormData();
 		formData.append('image', file);
@@ -44,7 +40,12 @@ const ImageLoader = ({ isShow, handleClose, handleFormData }) => {
 				<div className="image-loader__block">
 					<input ref={refInput} type="file" />
 				</div>
-				<img className="image-loader__image" id="myImg" src={grayPlaceholder} />
+				<img
+					alt=""
+					className="image-loader__image"
+					id="myImg"
+					src={grayPlaceholder}
+				/>
 			</Modal.Body>
 
 			<Modal.Footer>
