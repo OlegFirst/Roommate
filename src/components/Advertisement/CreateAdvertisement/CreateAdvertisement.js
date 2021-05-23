@@ -1,45 +1,51 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Button, FormControl } from 'react-bootstrap';
 
 import Header from '../../_commonComponents/Header/Header';
 import ImageLoader from '../../_commonComponents/ImageLoader/ImageLoader';
 
-import { createAdvetritesement } from '../../../func/createAdvetritesement';
 import axios from '../../../func/axios';
 
 const CreateAdvertisement = () => {
+	const history = useHistory();
 	const refLocation = useRef(null);
 	const refStreet = useRef(null);
 	const refNumberOfRooms = useRef(null);
 	const refNumberPeople = useRef(null);
 	const refPrice = useRef(null);
 	const refDescription = useRef(null);
-	// TO DO: Photos
 
-	const refImageLoader = useRef(null);
 	const [imageLoaderShow, setImageLoaderShow] = useState(false);
 	const [images, setImages] = useState([]);
 
-	const createAdvetritesementHandler = async () => {
+	const createAdvetritesementHandler = () => {
 		const data = {
 			location: refLocation.current.value + ' ' + refStreet.current.value,
 			price: refPrice.current.value,
 			sleepingPlaces: refNumberOfRooms.current.value,
 			description: refDescription.current.value,
+			bedrooms: refNumberOfRooms.current.value,
+			photos: images,
 		};
 
-		const result = await createAdvetritesement(data);
-		if (!result.isSuccess) {
-			alert('Error');
-		} else {
-			alert('Created');
-			refLocation.current.value = '';
-			refStreet.current.value = '';
-			refPrice.current.value = '';
-			refNumberPeople.current.value = '';
-			refNumberOfRooms.current.value = '';
-			refDescription.current.value = '';
-		}
+		axios
+			.post('listing/create', data)
+			.then(({ data }) => !!data?.data)
+			.catch(() => false)
+			.then((result) => {
+				if (!result) {
+					alert('Error');
+				} else {
+					refLocation.current.value = '';
+					refStreet.current.value = '';
+					refPrice.current.value = '';
+					refNumberPeople.current.value = '';
+					refNumberOfRooms.current.value = '';
+					refDescription.current.value = '';
+					history.push('/profile');
+				}
+			});
 	};
 
 	const imageLoaderClose = (info) => {
