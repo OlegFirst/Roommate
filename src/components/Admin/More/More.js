@@ -5,23 +5,27 @@ import Picture from '../../_commonComponents/Picture/Picture';
 import AdvertisementAuthor from '../../Advertisement/AdvertisementMore/AdvertisementAuthor';
 const AdvertisementMore = (props) => {
 	const advertisementDetails = props.location.state || {};
-	const { location, description, sleepingPlaces, price, accountId } = advertisementDetails.data;
-	const history = useHistory();
-		
-	const mainPicturesList = [];
-	const MY_ROOM = '';
 	
-	// const mainPicturesList = MY_ROOM.photoes.map((item, index) => {
-		// if (index === 0) {
-			// return false;
-		// }
-
-		// return (
-			// <li className="main__pictures-item" key={index}>
-				// <Picture url={item} />
-			// </li>
-		// );
-	// });
+	const {
+		location,
+		description,
+		sleepingPlaces,
+		price,
+		accountId,
+		photos,
+		bedrooms,
+		livingSpace,
+	} = advertisementDetails.data;
+	
+	const mainPicturesList = photos?.slice(1).map((item, index) => {
+		return (
+			<li className="main__pictures-item" key={index}>
+				<Picture url={item} />
+			</li>
+		);
+	});
+	
+	const history = useHistory();
 	
 	const mainClickedHandler = () => {
 		history.push('/admin');
@@ -38,7 +42,7 @@ const AdvertisementMore = (props) => {
 					<div className="main__caption caption">
 						<div className="caption__header">
 							<div className="caption__picture">
-							{false && <Picture url={MY_ROOM.photoes[0]} />}
+								{photos?.[0] && <Picture url={photos[0]} />}
 							</div>
 
 							<ul className="caption__text">
@@ -46,16 +50,14 @@ const AdvertisementMore = (props) => {
 
 								<li className="caption__text-item">Price: {price}</li>
 
-								{false && (
+								{livingSpace && (
 									<li className="caption__text-item">
-										Living space: {MY_ROOM.livingSpace} sq. m.
+										Living space: {livingSpace} sq. m.
 									</li>
 								)}
 
-								{false && (
-									<li className="caption__text-item">
-										Bathrooms: {MY_ROOM.bathRooms}
-									</li>
+								{bedrooms && (
+									<li className="caption__text-item">bedrooms: {bedrooms}</li>
 								)}
 
 								<li className="caption__text-item">

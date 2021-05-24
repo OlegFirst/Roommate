@@ -3,13 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 import Header from '../_commonComponents/HeaderAdmin/HeaderAdmin';
-// import More from './More/More';
 import Picture from '../_commonComponents/Picture/Picture';
 
 import {
 	serverGetList,
-	serverDeleteApartment,
-	// serverDeleteAcaunt,
+	serverDeleteApartment
 } from '../../func/admin';
 
 const Admin = () => {
@@ -22,7 +20,7 @@ const Admin = () => {
 		if (!result.isSuccess) {
 			alert('Error');
 			return;
-		}
+		}		
 		setAdvertisementList(result.data);
 	};
 
@@ -31,7 +29,7 @@ const Admin = () => {
 	}, []);
 
 	// Show all apartments list
-	const mainClickedHandler = async () => {
+	const mainClickedHandler = () => {
 		showAllApartmentList();
 	};
 
@@ -47,11 +45,20 @@ const Admin = () => {
 	};
 
 	const apartmentList = advertisementList.map((item, index) => {
-		const { listingId, location, description } = item;
+		const { listingId, location, description, photos } = item;		
 		return (
 			<li className="apartments__apartment apartment" key={index}>
 				<div className="apartment__picture">
-					{false && <Picture url={item.photoes[0]} />}
+					{
+						photos.length > 0
+						&& 
+						<Picture url={photos[0]} />
+					}
+					{
+						photos.length === 0
+						&& 
+						<h3>No picture yet</h3>
+					}
 				</div>
 				<div className="apartment__text">
 					<p>{location}</p>
